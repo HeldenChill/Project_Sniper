@@ -33,7 +33,7 @@ namespace Utilitys.Core
         [HideInInspector]
         protected virtual void Awake()
         {
-            CharacterData = ScriptableObject.CreateInstance(typeof(CharacterParameterData)) as CharacterParameterData;
+            CharacterData = new CharacterParameterData();
             WorldInterfaceSystem = new CharacterWorldInterfaceSystem(WorldInterfaceModule, CharacterData);
             NavigationSystem = new CharacterNavigationSystem(NavigationModule, CharacterData);
             LogicSystem = new CharacterLogicSystem(LogicModule, CharacterData);

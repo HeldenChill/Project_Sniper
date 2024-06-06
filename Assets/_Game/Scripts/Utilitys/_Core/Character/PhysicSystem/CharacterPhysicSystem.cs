@@ -12,8 +12,8 @@ namespace Utilitys.Core.Character.PhysicSystem
         #endregion
         public CharacterPhysicSystem(AbstractPhysicModule module, CharacterParameterData characterData)
         {
-            Data = ScriptableObject.CreateInstance(typeof(PhysicData)) as PhysicData;
-            Parameter = ScriptableObject.CreateInstance(typeof(PhysicParameter)) as PhysicParameter;
+            Data = new PhysicData();
+            Parameter = new PhysicParameter();
             Data.CharacterParameterData = characterData;
             this.module = module;
             module.Initialize(Data,Parameter);

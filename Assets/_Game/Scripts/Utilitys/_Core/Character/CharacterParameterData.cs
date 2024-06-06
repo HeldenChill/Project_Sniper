@@ -5,7 +5,7 @@ using UnityEditor;
 using System;
 namespace Utilitys.Core.Character
 {
-    public class CharacterParameterData : ScriptableObject
+    public class CharacterParameterData 
     {
         private Transform characterTransform;
         private bool isFaceRight = true;

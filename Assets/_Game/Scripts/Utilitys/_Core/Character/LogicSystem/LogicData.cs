@@ -24,7 +24,7 @@ namespace Utilitys.Core.Character.LogicSystem
         {
             if(Clone == null)
             {
-                Clone = CreateInstance(typeof(LogicData)) as LogicData;
+                Clone = new LogicData();
             }
             Clone.RemainingJump = RemainingJump;
             Clone.IsEndAbility = IsEndAbility;

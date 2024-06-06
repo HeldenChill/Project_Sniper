@@ -14,8 +14,8 @@ namespace Utilitys.Core.Character.WorldInterfaceSystem
         public CharacterWorldInterfaceSystem(WorldInterfaceModule module, CharacterParameterData characterData)
         {
             this.module = module;
-            Data = ScriptableObject.CreateInstance(typeof(WorldInterfaceData)) as WorldInterfaceData;
-            Parameter = ScriptableObject.CreateInstance(typeof(WorldInterfaceParameter)) as WorldInterfaceParameter;
+            Data = new WorldInterfaceData();
+            Parameter = new WorldInterfaceParameter();
             Data.CharacterParameterData = characterData;
             module.Initialize(Data, Parameter);
         }

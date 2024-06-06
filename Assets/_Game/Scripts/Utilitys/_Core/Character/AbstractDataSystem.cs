@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Utilitys.Core.Character
 {
     using System;
-    public abstract class AbstractDataSystem<D> : ScriptableObject
+    public abstract class AbstractDataSystem<D> 
     {
         protected D Clone;
         public CharacterParameterData CharacterParameterData;

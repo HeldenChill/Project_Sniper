@@ -18,8 +18,8 @@ namespace Utilitys.Core.Character.LogicSystem
         public LogicEvent Event;
         public CharacterLogicSystem(AbstractLogicModule module, CharacterParameterData characterData)
         {
-            Data = ScriptableObject.CreateInstance(typeof(LogicData)) as LogicData;
-            Parameter = ScriptableObject.CreateInstance(typeof(LogicParameter)) as LogicParameter;
+            Data = new LogicData();
+            Parameter = new LogicParameter();
             Event = ScriptableObject.CreateInstance(typeof(LogicEvent)) as LogicEvent;
             Data.CharacterParameterData = characterData;
             module.Initialize(Data, Parameter, Event);

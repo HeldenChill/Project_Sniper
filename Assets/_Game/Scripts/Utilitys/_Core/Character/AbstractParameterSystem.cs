@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Utilitys.Core.Character
 {
-    public class AbstractParameterSystem : ScriptableObject
+    public class AbstractParameterSystem 
     {
 
     }

@@ -21,8 +21,8 @@ namespace Utilitys.Core.Character.NavigationSystem
         //Initialize
         public CharacterNavigationSystem(AbstractNavigationModule inputModule, CharacterParameterData characterData)
         {
-            Data = ScriptableObject.CreateInstance(typeof(NavigationData)) as NavigationData;
-            Parameter = ScriptableObject.CreateInstance(typeof(NavigationParameter)) as NavigationParameter;
+            Data = new NavigationData();
+            Parameter = new NavigationParameter();
             this.module = inputModule;
             Data.CharacterParameterData = characterData;
             module.Initialize(Data, Parameter);

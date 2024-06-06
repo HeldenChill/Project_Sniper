@@ -34,7 +34,7 @@ namespace Utilitys.Core.Character.NavigationSystem
         {
             if(Clone == null)
             {
-                Clone = CreateInstance(typeof(NavigationData)) as NavigationData;
+                Clone = new NavigationData();
             }
             Clone.Attack1 = Attack1;
             Clone.Attack2 = Attack2;

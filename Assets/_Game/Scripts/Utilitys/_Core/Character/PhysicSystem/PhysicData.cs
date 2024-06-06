@@ -10,7 +10,7 @@ namespace Utilitys.Core.Character.PhysicSystem
         {
             if(Clone == null)
             {
-                Clone = CreateInstance(typeof(PhysicData)) as PhysicData;
+                Clone = new PhysicData();
             }
         }
     }
