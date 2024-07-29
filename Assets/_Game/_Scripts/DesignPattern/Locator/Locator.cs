@@ -2,18 +2,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DesignPattern
+namespace Common
 {
     public static class Locator
     {
-        static IDataService dataService;
-        public static IDataService DataService
+        private static IDataService data;
+        public static IDataService Data
         {
-            get => dataService;
+            get => data;
             set
             {
-                if (dataService == null)
-                    dataService = value;
+                data = value;
+            }
+        }
+
+        private static IAdsService ads;
+        public static IAdsService Ads
+        {
+            get => ads;
+            set
+            {
+                ads = value;
+            }
+        }
+        private static IAudioService audio;
+        public static IAudioService Audio
+        {
+            get => audio;
+            set
+            {
+                audio = value;
+            }
+        }
+
+        private static ILevelService level;
+        public static ILevelService Level
+        {
+            get => level;
+            set
+            {
+                level = value;
             }
         }
     }

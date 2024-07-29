@@ -349,7 +349,6 @@ namespace DesignPattern
     public enum PoolType
     {
         NONE = -1,
-        B0 = 0,
-        B1 = 1,
+        DIRECTION_BUTTON = 0,
     }
 }
