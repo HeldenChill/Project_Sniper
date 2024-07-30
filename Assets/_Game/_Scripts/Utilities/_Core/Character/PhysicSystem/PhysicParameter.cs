@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilitys.Core.Character.PhysicSystem
+namespace Utilities.Core.Character.PhysicSystem
 {
     public class PhysicParameter : AbstractParameterSystem
     {

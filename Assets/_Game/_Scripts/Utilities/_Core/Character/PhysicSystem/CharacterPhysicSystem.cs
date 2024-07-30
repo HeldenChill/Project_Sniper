@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Utilitys.Core.Character.PhysicSystem
+namespace Utilities.Core.Character.PhysicSystem
 {
     using System;
     using WorldInterfaceSystem;
@@ -12,11 +12,11 @@ namespace Utilitys.Core.Character.PhysicSystem
         #endregion
         public CharacterPhysicSystem(AbstractPhysicModule module, CharacterParameterData characterData)
         {
-            Data = new PhysicData();
+            data = new PhysicData();
             Parameter = new PhysicParameter();
-            Data.CharacterParameterData = characterData;
+            data.CharacterParameterData = characterData;
             this.module = module;
-            module.Initialize(Data,Parameter);
+            module.Initialize(data,Parameter);
         }
 
 
@@ -65,12 +65,12 @@ namespace Utilitys.Core.Character.PhysicSystem
         }
         public void SetTransformPosition(Vector3 position)
         {
-            Data.CharacterParameterData.CharacterTransform.position = position;
+            data.CharacterParameterData.CharacterTransform.position = position;
         }
 
         public void AddTransformPosition(Vector3 position)
         {
-            Data.CharacterParameterData.CharacterTransform.position += position;
+            data.CharacterParameterData.CharacterTransform.position += position;
         }
         #endregion
     }

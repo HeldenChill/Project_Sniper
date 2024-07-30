@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Utilitys.Core.Character.PhysicSystem
+namespace Utilities.Core.Character.PhysicSystem
 {
     
     public abstract class AbstractPhysicModule : AbstractModuleSystem<PhysicData,PhysicParameter>
@@ -32,7 +32,7 @@ namespace Utilitys.Core.Character.PhysicSystem
         public abstract void SetVelocityX(float velX, int frame);
         public abstract void SetVelocityY(float velY);
         public abstract void SetVelocityY(float velY, float time);
-        public abstract void SetVelocityY(float velX, int frame);
+        public abstract void SetVelocityY(float velY, int frame);
         public abstract void SetActiveRBStimulate(bool val);
         public abstract void SetGravityScale(float val);
         public abstract void SetOriginalGravityScale();

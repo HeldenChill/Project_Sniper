@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilitys.Core.Character.LogicSystem
+namespace Utilities.Core.Character.LogicSystem
 {
     public abstract class AbstractLogicModule : AbstractModuleSystem<LogicData,LogicParameter>
     {

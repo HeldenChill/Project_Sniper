@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilitys.Core.Data {
+namespace Utilities.Core.Data {
     public class CharacterData : ScriptableObject
     {
         public const float BASE_ATTACK_RANGE = 3f;

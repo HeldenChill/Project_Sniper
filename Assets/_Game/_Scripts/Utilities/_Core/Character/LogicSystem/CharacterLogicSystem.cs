@@ -1,12 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Utilitys.Core.Character.LogicSystem
+namespace Utilities.Core.Character.LogicSystem
 {
     using WorldInterfaceSystem;
     using NavigationSystem;
     using PhysicSystem;
-    using Utilitys.Core.Character;
+    using Utilities.Core.Character;
     using System;
 
     /// <summary>
@@ -18,11 +18,12 @@ namespace Utilitys.Core.Character.LogicSystem
         public LogicEvent Event;
         public CharacterLogicSystem(AbstractLogicModule module, CharacterParameterData characterData)
         {
-            Data = new LogicData();
+            data = new LogicData();
             Parameter = new LogicParameter();
             Event = ScriptableObject.CreateInstance(typeof(LogicEvent)) as LogicEvent;
-            Data.CharacterParameterData = characterData;
-            module.Initialize(Data, Parameter, Event);
+            this.module = module;
+            data.CharacterParameterData = characterData;
+            module.Initialize(data, Parameter, Event);
         }
 
         
@@ -43,7 +44,7 @@ namespace Utilitys.Core.Character.LogicSystem
 
         public void ReceiveInformation(NavigationData navigation)
         {
-            
+            Parameter.NavData = navigation;
         }       
         public void ReceiveInformation(Type type, string name)
         {

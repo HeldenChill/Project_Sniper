@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilitys.Core
+namespace Utilities.Core
 {
-    using Utilitys.Core.Character;
-    using Utilitys.Core.Character.WorldInterfaceSystem;
-    using Utilitys.Core.Character.NavigationSystem;    
-    using Utilitys.Core.Character.LogicSystem;
-    using Utilitys.Core.Character.PhysicSystem;
+    using Utilities.Core.Character;
+    using Utilities.Core.Character.WorldInterfaceSystem;
+    using Utilities.Core.Character.NavigationSystem;    
+    using Utilities.Core.Character.LogicSystem;
+    using Utilities.Core.Character.PhysicSystem;
 
     public class BaseCharacter : MonoBehaviour
     {
@@ -43,26 +43,16 @@ namespace Utilitys.Core
         protected virtual void OnEnable()
         {
             #region Update Data Event
-            WorldInterfaceSystem.OnUpdateData += NavigationSystem.ReceiveInformation;
-            WorldInterfaceSystem.OnUpdateData += LogicSystem.ReceiveInformation;
-
-            NavigationSystem.OnUpdateData += LogicSystem.ReceiveInformation;
-            PhysicSystem.OnUpdateData += LogicSystem.ReceiveInformation;
-
+            NavigationSystem.ReceiveInformation(WorldInterfaceSystem.Data);
+            LogicSystem.ReceiveInformation(WorldInterfaceSystem.Data);
+            LogicSystem.ReceiveInformation(NavigationSystem.Data);
+            LogicSystem.ReceiveInformation(PhysicSystem.Data);
             #endregion
 
         }
 
         protected virtual void OnDisable()
-        {
-            #region Update Data Event
-            WorldInterfaceSystem.OnUpdateData -= NavigationSystem.ReceiveInformation;
-            WorldInterfaceSystem.OnUpdateData -= LogicSystem.ReceiveInformation;
-
-            NavigationSystem.OnUpdateData -= LogicSystem.ReceiveInformation;
-            PhysicSystem.OnUpdateData -= LogicSystem.ReceiveInformation;
-            #endregion
-        }
+        {}
 
         protected virtual void Update()
         {

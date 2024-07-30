@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Utilitys.Core.Character.NavigationSystem
+namespace Utilities.Core.Character.NavigationSystem
 {
-    using Utilitys.Core.Character;
-    using Utilitys.Core.Character.LogicSystem;
-    using Utilitys.Core.Character.WorldInterfaceSystem;
+    using Utilities.Core.Character;
+    using Utilities.Core.Character.LogicSystem;
+    using Utilities.Core.Character.WorldInterfaceSystem;
 
     /// <summary>
     /// Responsibility for navigating the Dynamic Object (Player or Agent) 
@@ -21,11 +21,11 @@ namespace Utilitys.Core.Character.NavigationSystem
         //Initialize
         public CharacterNavigationSystem(AbstractNavigationModule inputModule, CharacterParameterData characterData)
         {
-            Data = new NavigationData();
+            data = new NavigationData();
             Parameter = new NavigationParameter();
             this.module = inputModule;
-            Data.CharacterParameterData = characterData;
-            module.Initialize(Data, Parameter);
+            data.CharacterParameterData = characterData;
+            module.Initialize(data, Parameter);
         }
         #endregion
         #region ReceiveInformation Functions

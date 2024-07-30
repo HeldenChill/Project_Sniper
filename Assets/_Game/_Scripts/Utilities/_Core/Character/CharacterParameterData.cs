@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
-namespace Utilitys.Core.Character
+namespace Utilities.Core.Character
 {
     public class CharacterParameterData 
     {

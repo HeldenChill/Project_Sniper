@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Utilitys.Core.Character.WorldInterfaceSystem
+namespace Utilities.Core.Character.WorldInterfaceSystem
 {
-    using Utilitys.Core.Character;
+    using Utilities.Core.Character;
     /// <summary>
     /// Responsible for updating knowledgement about the game world for DynamicObject
     /// </summary>
@@ -14,10 +14,10 @@ namespace Utilitys.Core.Character.WorldInterfaceSystem
         public CharacterWorldInterfaceSystem(WorldInterfaceModule module, CharacterParameterData characterData)
         {
             this.module = module;
-            Data = new WorldInterfaceData();
+            data = new WorldInterfaceData();
             Parameter = new WorldInterfaceParameter();
-            Data.CharacterParameterData = characterData;
-            module.Initialize(Data, Parameter);
+            data.CharacterParameterData = characterData;
+            module.Initialize(data, Parameter);
         }
         #endregion
     }

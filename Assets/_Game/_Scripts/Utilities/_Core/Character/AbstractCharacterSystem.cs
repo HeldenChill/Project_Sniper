@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilitys.Core.Character
+namespace Utilities.Core.Character
 {
     using System;
     public abstract class AbstractCharacterSystem<M,D,P>
@@ -10,18 +10,16 @@ namespace Utilitys.Core.Character
         where D : AbstractDataSystem<D>
         where P : AbstractParameterSystem
     {
-        public event Action<D> OnUpdateData;
         protected M module;
-        protected D Data;
+        protected D data;
         protected P Parameter;
         protected virtual void UpdateData()
         {
             module.UpdateData();
         }   
-        protected virtual void InvokeOnUpdateData()
+        public virtual D Data
         {
-            D data = Data.OnUpdateData();
-            OnUpdateData?.Invoke(data);
+            get => data;
         }
         public virtual void FixedUpdateData()
         {
@@ -30,7 +28,6 @@ namespace Utilitys.Core.Character
         public void Run()
         {
             UpdateData();
-            InvokeOnUpdateData();
         }
     }
 }

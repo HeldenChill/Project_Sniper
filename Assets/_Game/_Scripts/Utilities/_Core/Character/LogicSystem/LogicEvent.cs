@@ -1,25 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Utilitys.Core.Character.LogicSystem
+namespace Utilities.Core.Character.LogicSystem
 {
+    using Codice.Client.Common;
     using System;
     public class LogicEvent : ScriptableObject
     {
         /// <summary>
         /// Set <c>Velocity_x</c> for character in a period of time.
         /// </summary>
-        public event Action<float, float> _SetVelocityX;
+        public event Action<float> _SetVelocityX;
+        public event Action<float, float> _SetVelocityXTime;
         public event Action<float, int> _SetVelocityXFrame;
         /// <summary>
         /// Set <c>Velocity_y</c> for character in a period of time.
         /// </summary>
-        public event Action<float, float> _SetVelocityY;
+        public event Action<float> _SetVelocityY;
+        public event Action<float, float> _SetVelocityYTime;
         public event Action<float, int> _SetVelocityYFrame;
         /// <summary>
         /// Set <c>Velocity</c> for character in a period of time.
         /// </summary>
-        public event Action<Vector2, float> _SetVelocity;
+        public event Action<Vector2> _SetVelocity;
+        public event Action<Vector2, float> _SetVelocityTime;
         public event Action<Vector2, int> _SetVelocityFrame;
         /// <summary>
         /// Set <c>GravityScale = 0</c> in character RigidBody.
@@ -57,36 +61,37 @@ namespace Utilitys.Core.Character.LogicSystem
         /// </summary>
         public event Action _SetDynamicRotation;
 
-        private bool initSetVelocityX = true;
+        public void SetVelocityX(float speed)
+        {
+            _SetVelocityX?.Invoke(speed);
+        }
         public void SetVelocityX(float speed, float time = -1f)
         {
-            if (initSetVelocityX)
-            {
-                initSetVelocityX = false;
-                return;
-            }
-
-            WarningInformation(_SetVelocityX, "SetVelocityX");
-            _SetVelocityX?.Invoke(speed, time);
+            WarningInformation(_SetVelocityXTime, "SetVelocityX");
+            _SetVelocityXTime?.Invoke(speed, time);
         }
         public void SetVelocityX(float speed, int frame)
         {
-            WarningInformation(_SetVelocityX, "SetVelocityXFrame");
+            WarningInformation(_SetVelocityXTime, "SetVelocityXFrame");
             _SetVelocityXFrame?.Invoke(speed, frame);
+        }
+        public void SetVelocityY(float speed)
+        {
+            _SetVelocityY?.Invoke(speed);
         }
         public void SetVelocityY(float speed, float time = -1f)
         {
-            WarningInformation(_SetVelocityY, "SetVelocityY");
-            _SetVelocityY?.Invoke(speed, time);
+            WarningInformation(_SetVelocityYTime, "SetVelocityY");
+            _SetVelocityYTime?.Invoke(speed, time);
         }
         public void SetVelocityY(float speed, int frame)
         {
-            WarningInformation(_SetVelocityY, "SetVelocityYFrame");
+            WarningInformation(_SetVelocityYTime, "SetVelocityYFrame");
             _SetVelocityYFrame?.Invoke(speed, frame);
         }
         public void SetVelocity(Vector2 speed, float time = -1f)
         {
-            _SetVelocity?.Invoke(speed, time);
+            _SetVelocityTime?.Invoke(speed, time);
         }
         public void SetVelocity(Vector2 speed, int frame)
         {

@@ -2,10 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Utilitys.Core.Character.NavigationSystem
+namespace Utilities.Core.Character.NavigationSystem
 {
-    using Utilitys.Core.Character.WorldInterfaceSystem;
-    using Utilitys.Core.Character.LogicSystem;
+    using Utilities.Core.Character.WorldInterfaceSystem;
+    using Utilities.Core.Character.LogicSystem;
 
     public class NavigationParameter : AbstractParameterSystem
     {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilitys.Core.Character.NavigationSystem
+namespace Utilities.Core.Character.NavigationSystem
 {
     public abstract class AbstractNavigationModule : AbstractModuleSystem<NavigationData,NavigationParameter>
     { 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilitys.Core.Character
+namespace Utilities.Core.Character
 {
     [DefaultExecutionOrder(15)]
     public abstract class AbstractModuleSystem<D, P> : MonoBehaviour

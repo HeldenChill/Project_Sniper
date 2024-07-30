@@ -2,10 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilitys.Core.Character.NavigationSystem
+namespace Utilities.Core.Character.NavigationSystem
 {
-    using System;
-
+    using Utilities.Timer;
+    public class Trigger
+    {
+        bool value;
+        public bool Value
+        {
+            get => value;
+            set
+            {
+                this.value = value;
+                TimerManager.Ins.WaitForFrame(1, () => this.value = false);
+            }
+        }
+    }
     public class NavigationData : AbstractDataSystem<NavigationData>
     {
         private Vector2 velocityControl = Vector2.zero;
@@ -13,7 +25,7 @@ namespace Utilitys.Core.Character.NavigationSystem
         public bool Attack1 = false;
         public bool Attack2 = false;
         public bool Attack3 = false;
-        public bool Jump = false;
+        public Trigger Jump = new Trigger();
         public bool Dash = false;
         public bool EquipItem = false;
 
@@ -28,32 +40,6 @@ namespace Utilitys.Core.Character.NavigationSystem
                 }
 
             }
-        }
-
-        protected override void UpdateDataClone()
-        {
-            if(Clone == null)
-            {
-                Clone = new NavigationData();
-            }
-            Clone.Attack1 = Attack1;
-            Clone.Attack2 = Attack2;
-            Clone.Attack3 = Attack3;
-            Clone.velocityControl = velocityControl;
-            Clone.Jump = Jump;
-            Clone.Dash = Dash;
-            Clone.EquipItem = EquipItem;
-            ResetData();
-        }
-
-        protected void ResetData()
-        {
-            Attack1 = false;
-            Attack2 = false;
-            Attack3 = false;
-            Jump = false;
-            Dash = false;
-            EquipItem = false;
         }
     }
 }

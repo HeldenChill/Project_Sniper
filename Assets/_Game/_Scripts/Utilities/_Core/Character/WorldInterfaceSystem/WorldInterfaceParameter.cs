@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utilitys.Core.Character.WorldInterfaceSystem
+namespace Utilities.Core.Character.WorldInterfaceSystem
 {
-    using Utilitys.Core.Character;
+    using Utilities.Core.Character;
     public class WorldInterfaceParameter : AbstractParameterSystem
     {
         

@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace Utilitys.Core.Character.LogicSystem
+namespace Utilities.Core.Character.LogicSystem
 {
-    using Utilitys.Core.Data;
+    using Utilities.Core.Data;
     using System;
-    using Utilitys;
+    using Utilities;
     public class LogicData : AbstractDataSystem<LogicData>
     {
         public int RemainingJump;
@@ -20,21 +20,5 @@ namespace Utilitys.Core.Character.LogicSystem
         public bool IsGetDamage = false;
         public bool IsDeflecting = false;
         public bool IsBlocking = false;
-        protected override void UpdateDataClone()
-        {
-            if(Clone == null)
-            {
-                Clone = new LogicData();
-            }
-            Clone.RemainingJump = RemainingJump;
-            Clone.IsEndAbility = IsEndAbility;
-            Clone.IsDashing = IsDashing;
-            Clone.CanDash = CanDash;
-            Clone.IsInflictEffect = IsInflictEffect;
-            Clone.IsGetDamage = IsGetDamage;           
-        }
-
-        
-
     }
 }
