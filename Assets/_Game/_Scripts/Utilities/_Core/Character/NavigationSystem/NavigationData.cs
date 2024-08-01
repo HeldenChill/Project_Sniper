@@ -20,26 +20,12 @@ namespace Utilities.Core.Character.NavigationSystem
     }
     public class NavigationData : AbstractDataSystem<NavigationData>
     {
-        private Vector2 velocityControl = Vector2.zero;
-
         public bool Attack1 = false;
         public bool Attack2 = false;
         public bool Attack3 = false;
         public Trigger Jump = new Trigger();
         public bool Dash = false;
         public bool EquipItem = false;
-
-        public Vector2 VelocityControl
-        {
-            get => velocityControl;
-            set
-            {
-                if (velocityControl != value)
-                {
-                    velocityControl = value;
-                }
-
-            }
-        }
+        public Vector2 MoveDirection;
     }
 }

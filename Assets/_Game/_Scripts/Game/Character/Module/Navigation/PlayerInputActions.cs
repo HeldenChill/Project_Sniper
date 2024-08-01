@@ -37,6 +37,15 @@ namespace _Game.Character
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Movement"",
+                    ""type"": ""Value"",
+                    ""id"": ""fd0d7e22-9471-4d0f-81d7-cec79348c029"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -50,6 +59,39 @@ namespace _Game.Character
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""807f4436-24b8-44e1-9e0a-0b68b6633c79"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""67bc26ef-bcc8-4b3d-9b43-943ae29b5383"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""4f2ba1ec-655e-47a8-be9f-bdcb4d5582a4"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Movement"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -59,6 +101,7 @@ namespace _Game.Character
             // Player
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+            m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -121,11 +164,13 @@ namespace _Game.Character
         private readonly InputActionMap m_Player;
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Jump;
+        private readonly InputAction m_Player_Movement;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
             public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
+            public InputAction @Movement => m_Wrapper.m_Player_Movement;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -138,6 +183,9 @@ namespace _Game.Character
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Movement.started += instance.OnMovement;
+                @Movement.performed += instance.OnMovement;
+                @Movement.canceled += instance.OnMovement;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -145,6 +193,9 @@ namespace _Game.Character
                 @Jump.started -= instance.OnJump;
                 @Jump.performed -= instance.OnJump;
                 @Jump.canceled -= instance.OnJump;
+                @Movement.started -= instance.OnMovement;
+                @Movement.performed -= instance.OnMovement;
+                @Movement.canceled -= instance.OnMovement;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -165,6 +216,7 @@ namespace _Game.Character
         public interface IPlayerActions
         {
             void OnJump(InputAction.CallbackContext context);
+            void OnMovement(InputAction.CallbackContext context);
         }
     }
 }

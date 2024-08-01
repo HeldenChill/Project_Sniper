@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Utilities.Core.Character
 {
-    public class AbstractParameterSystem 
+    public class AbstractParameterSystem
     {
-
+       
     }
 }

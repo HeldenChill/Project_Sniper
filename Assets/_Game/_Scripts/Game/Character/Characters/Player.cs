@@ -5,7 +5,7 @@ using Utilities.Core;
 
 namespace _Game.Character
 {
-    public class Player : BaseCharacter
+    public class Player : BaseCharacter<PlayerStatus>
     {
         protected override void OnEnable()
         {

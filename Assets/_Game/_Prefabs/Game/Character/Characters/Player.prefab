@@ -92,6 +92,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c745c37232cd43147906a431783ffec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Stats: {fileID: 11400000, guid: e608ad8fc2a8f854d869e479a5525cb0, type: 2}
   WorldInterfaceModule: {fileID: 4750699293615450764}
   NavigationModule: {fileID: 7121994988495848043}
   LogicModule: {fileID: 3623865738152697113}

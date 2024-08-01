@@ -10,5 +10,15 @@ namespace Utilities.Core.Character.LogicSystem
         public Action<Type, string> OnAnimationTriggerEvent;
         public Action<Type, AnimationClip> OnReceiveAnimationClipData;
         public NavigationData NavData;
+
+        private ScriptableObject stats;
+        public void SetStats<T>(T value) where T : ScriptableObject
+        {
+            stats = value;
+        }
+        public T GetStats<T>() where T : ScriptableObject
+        {
+            return (T)stats;
+        }
     }
 }

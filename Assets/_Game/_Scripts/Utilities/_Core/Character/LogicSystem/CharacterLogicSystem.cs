@@ -46,6 +46,11 @@ namespace Utilities.Core.Character.LogicSystem
         {
             Parameter.NavData = navigation;
         }       
+
+        public void ReceiveInformation(ScriptableObject stats)
+        {
+            Parameter.SetStats(stats);
+        }
         public void ReceiveInformation(Type type, string name)
         {
             Parameter.OnAnimationTriggerEvent?.Invoke(type, name);

@@ -11,9 +11,11 @@ namespace _Game.Character
     public class InputModule : AbstractNavigationModule
     {
 
+        PlayerInputActions playerInputActions;
+
         private void Awake()
         {
-            PlayerInputActions playerInputActions = new PlayerInputActions();
+            playerInputActions = new PlayerInputActions();
             playerInputActions.Player.Enable();
             playerInputActions.Player.Jump.performed += OnJump;
         }
@@ -29,12 +31,11 @@ namespace _Game.Character
 
         public override void UpdateData()
         {
-
+            Data.MoveDirection = playerInputActions.Player.Movement.ReadValue<Vector2>();
         }
 
         protected void OnJump(InputAction.CallbackContext callback)
         {
-            DevLog.Log(DevId.Hung, "Jump");
             Data.Jump.Value = true;
         }
     }

@@ -10,8 +10,10 @@ namespace Utilities.Core
     using Utilities.Core.Character.LogicSystem;
     using Utilities.Core.Character.PhysicSystem;
 
-    public class BaseCharacter : MonoBehaviour
+    public class BaseCharacter<T> : MonoBehaviour where T : ScriptableObject
     {
+        [SerializeField]
+        protected T Stats;
         [SerializeField]
         protected WorldInterfaceModule WorldInterfaceModule;
         [SerializeField]
@@ -47,6 +49,7 @@ namespace Utilities.Core
             LogicSystem.ReceiveInformation(WorldInterfaceSystem.Data);
             LogicSystem.ReceiveInformation(NavigationSystem.Data);
             LogicSystem.ReceiveInformation(PhysicSystem.Data);
+            LogicSystem.ReceiveInformation(Stats);
             #endregion
 
         }
