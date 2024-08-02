@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Utilities.Core.Character.WorldInterfaceSystem
 {
     using Utilities.Core.Character;
+    public abstract class SensorData { }
     public class WorldInterfaceData : AbstractDataSystem<WorldInterfaceData>
     {
         //Can improve performance by check value change or not
@@ -16,5 +17,12 @@ namespace Utilities.Core.Character.WorldInterfaceSystem
 
         public IReadOnlyList<RaycastHit2D> WallHit2D;
         public IReadOnlyList<RaycastHit2D> CharacterHit2D;
+
+        public List<SensorData> SensorDatas;
+
+        public T GetSensorData<T>() where T : SensorData
+        {
+            return SensorDatas.Find(x => x is T) as T;
+        }
     }
 }
