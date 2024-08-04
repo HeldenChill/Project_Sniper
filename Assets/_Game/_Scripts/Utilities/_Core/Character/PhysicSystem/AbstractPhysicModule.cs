@@ -23,7 +23,7 @@ namespace Utilities.Core.Character.PhysicSystem
             objectLayerId = LayerMask.NameToLayer(objectLayerName);
             ignoreLayerId = LayerMask.NameToLayer(ignoreLayerName);
         }
-        protected abstract void OnInit();        
+        protected abstract void OnInit();  
         public abstract void SetVelocity(Vector2 vel);
         public abstract void SetVelocity(Vector2 vel, float time);
         public abstract void SetVelocity(Vector2 vel, int frame);

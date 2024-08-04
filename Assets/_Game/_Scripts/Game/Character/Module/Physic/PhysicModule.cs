@@ -85,7 +85,7 @@ namespace _Game.Character
 
         public override void UpdateData()
         {
-            
+            Data.CharacterParameterData.RbVelocity = rb.velocity;
         }
 
         public override void UpdateEvent(int type)

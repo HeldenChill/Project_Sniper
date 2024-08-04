@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: PlayerStatus
   m_EditorClassIdentifier: 
   speed: 5
+  jumpSpeed: 10

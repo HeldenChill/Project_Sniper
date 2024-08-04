@@ -45,17 +45,7 @@ namespace Utilities.Core.Character
                 }
             }
         }
-        public Vector2 RbVelocity { 
-            get => rbVelocity;
-            set
-            {
-                if((rbVelocity - value).magnitude > 0.1f)
-                {
-                    rbVelocity = value;
-                }
-                    
-            }
-        }
+        public Vector2 RbVelocity;
 
         public Transform CharacterTransform { 
             get => characterTransform;

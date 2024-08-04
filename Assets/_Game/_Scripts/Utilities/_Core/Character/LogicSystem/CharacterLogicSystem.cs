@@ -39,7 +39,7 @@ namespace Utilities.Core.Character.LogicSystem
         }
         public void ReceiveInformation(WorldInterfaceData worldInterface)
         {
-            
+            Parameter.WIData = worldInterface;
         }
 
         public void ReceiveInformation(NavigationData navigation)

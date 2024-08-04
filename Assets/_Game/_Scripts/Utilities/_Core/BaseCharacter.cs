@@ -71,7 +71,7 @@ namespace Utilities.Core
             NavigationSystem.FixedUpdateData();
             LogicSystem.FixedUpdateData();
             PhysicSystem.FixedUpdateData();
-            
+           
         }
     }
 }

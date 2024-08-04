@@ -5,21 +5,31 @@ using UnityEngine;
 namespace _Game.Character
 {
     using Utilities.Core.Character.LogicSystem;
+    using Utilities.StateMachine;
     using System;
 
     public class PlayerLogicModule : AbstractLogicModule
     {
+        StateMachine stateMachine;
+        public override void Initialize(LogicData Data, LogicParameter Parameter, LogicEvent Event)
+        {
+            base.Initialize(Data, Parameter, Event);
+
+            stateMachine = new StateMachine();
+            stateMachine.AddState(State.IDLE ,new IdleState(Parameter, Data, Event));
+            stateMachine.AddState(State.MOVE, new  MoveState(Parameter, Data, Event));  
+            stateMachine.AddState(State.JUMP, new  JumpState(Parameter, Data, Event));
+
+            stateMachine.Start(State.IDLE);
+        }
         public override void UpdateData()
         {
-            if (Parameter.NavData.Jump.Value)
-            {
-                Event.SetVelocityY(10);
-            }
+            stateMachine.Update();
         }
+
         public override void FixedUpdateData()
         {
-            Event.SetVelocityX(Math.Sign(Parameter.NavData.MoveDirection.x) 
-                * Parameter.GetStats<PlayerStatus>().Speed);
+            stateMachine.FixedUpdate();
         }
     }
 }
