@@ -33,10 +33,6 @@ namespace Utilities.Core.Character.NavigationSystem
         {
             Parameter.UpdateParameter(worldInterface);
         }
-        public virtual void ReceiveInformation(LogicData logic)
-        {
-            Parameter.UpdateParameter(logic);
-        }
         #endregion
     }
 }

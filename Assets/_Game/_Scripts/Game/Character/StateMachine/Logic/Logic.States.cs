@@ -92,6 +92,7 @@ namespace _Game.Character
     #endregion
     public class JumpState : BaseLogicState<PlayerStats>
     {
+        bool isJumping = false;
         public JumpState(LogicParameter parameter, LogicData data, LogicEvent _event) 
             : base(parameter, data, _event)
         {
@@ -102,6 +103,7 @@ namespace _Game.Character
         public override void Enter()
         {
             Event.SetVelocityY(Stats.JumpSpeed);
+            isJumping = false;
         }
 
         public override void Exit()
@@ -111,6 +113,8 @@ namespace _Game.Character
 
         public override bool Update()
         {
+            isJumping = !Parameter.WIData.IsGrounded || isJumping;
+            if(!isJumping) return false;
             if (Parameter.WIData.IsGrounded)
             {
                 if(Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)

@@ -21,7 +21,7 @@ namespace Dynamic.WorldInterface.Sensor
         public override void UpdateState()
         {
             Data.TouchingGroundPoint = Physics2D.Raycast(groundCheck.position, Vector2Int.down, groundCheckRadius, layer);
-            Data.IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layer) && (Mathf.Abs(Data.CharacterParameterData.RbVelocity.y) <= 0.01f);
+            Data.IsGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, layer);
             RaycastHit2D hit = Physics2D.Raycast(wallCheck.position, transform.right, wallCheckRadius, layer);
             Data.IsTouchingWall = hit;
             Data.TouchingWallPoint = hit;               
