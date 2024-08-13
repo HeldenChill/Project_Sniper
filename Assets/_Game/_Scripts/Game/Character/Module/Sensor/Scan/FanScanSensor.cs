@@ -23,7 +23,7 @@ namespace Dynamic.WorldInterface.Sensor
 
         #endregion
 
-        public ScanSensorData SensorData
+        public FanScanSenorData SensorData
         {
             get; protected set;
         }
@@ -32,8 +32,8 @@ namespace Dynamic.WorldInterface.Sensor
             base.Initialize(Data, Parameter);
             edge1Angle = viewAngle;
             edge2Angle = -viewAngle;
-            SensorData = new ScanSensorData();
-            //Data.SensorDatas.Add(SensorData);
+            SensorData = new FanScanSenorData();
+            Data.SensorDatas.Add(SensorData);
         }
         public override void UpdateState()
         {
@@ -62,28 +62,6 @@ namespace Dynamic.WorldInterface.Sensor
             hit = Physics2D.Raycast(eyePosition.position, MathHelper.AngleToVector(edge1Angle, Data.CharacterParameterData.IsFaceRight), viewRange);
             edge1Angle += -angleChangeVal * Time.deltaTime;
             edge2Angle += angleChangeVal * Time.deltaTime;
-
-
-            if (!hit)
-            {
-                SensorData.HitTargetVector = default;
-                SensorData.DetectedObject = null;
-            }
-            else
-            {
-                SensorData.DetectedObject = hit.collider.gameObject;
-                SensorData.HitTargetVector = (hit.point - (Vector2)eyePosition.position);
-                if (SensorData.DetectedObject.layer == LayerMask.NameToLayer("Fighter"))
-                {
-                    SensorData.AttackObjectVector = (hit.point - (Vector2)eyePosition.position);
-                    SensorData.AttackObject = hit.collider.gameObject;
-                }
-                else
-                {
-                    //ArcherState.attackTargetVector = default;
-                    SensorData.AttackObject = default;
-                }
-            }
         }
     }
 }

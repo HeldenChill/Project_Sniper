@@ -24,5 +24,16 @@ namespace Utilities.Core.Character.WorldInterfaceSystem
                 sensors[i].UpdateState();
             }
         }
+
+        public void AddSensor(BaseSensor sensor)
+        {
+            sensor.Initialize(Data, Parameter);
+            sensors.Add(sensor);          
+        }
+
+        public void RemoveSensor(BaseSensor sensor)
+        {
+            sensors.Remove(sensor);
+        }
     }
 }

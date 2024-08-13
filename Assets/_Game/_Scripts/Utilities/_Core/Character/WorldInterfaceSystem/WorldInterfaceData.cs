@@ -17,9 +17,8 @@ namespace Utilities.Core.Character.WorldInterfaceSystem
 
         public IReadOnlyList<RaycastHit2D> WallHit2D;
         public IReadOnlyList<RaycastHit2D> CharacterHit2D;
-
-        public List<SensorData> SensorDatas;
-
+        protected List<SensorData> sensorDatas;
+        public List<SensorData> SensorDatas => sensorDatas ??= new List<SensorData>();
         public T GetSensorData<T>() where T : SensorData
         {
             return SensorDatas.Find(x => x is T) as T;

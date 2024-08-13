@@ -7,6 +7,14 @@ namespace _Game.Character
 {
     public class Player : BaseCharacter<PlayerStats>
     {
+        [SerializeField]
+        BaseWeapon weapon;
+        public BaseWeapon BaseWeapon => weapon;
+        protected override void Awake()
+        {
+            base.Awake();
+            weapon.Equip(WorldInterfaceModule, WorldInterfaceSystem.Data);
+        }
         protected override void OnEnable()
         {
             base.OnEnable();
