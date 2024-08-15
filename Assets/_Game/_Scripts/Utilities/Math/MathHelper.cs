@@ -122,11 +122,6 @@ namespace Utilities
             return quaternion;
         }
 
-        public static Quaternion GetQuaternionVector3(Vector3 vec)
-        {
-            return Quaternion.Euler(vec.x, vec.y, vec.z);
-        }
-
         public static Vector2 AngleToVector(float angle)
         {
             while (angle < 0)

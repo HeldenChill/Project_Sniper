@@ -1,9 +1,6 @@
-using Dynamic.WorldInterface.Data;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Utilities.Core.Character.WorldInterfaceSystem;
 using Utilities;
+using Utilities.Core.Character.WorldInterfaceSystem;
 
 namespace _Game
 {
@@ -25,6 +22,18 @@ namespace _Game
             module.RemoveSensor(sensor);
             data = null;
             module = null;
+        }
+        private void Update()
+        {
+            RotateAlongMouse();
+        }
+
+        protected void RotateAlongMouse()
+        {
+            Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 direction = (mousePos - (Vector2)transform.position);
+
+            transform.rotation = MathHelper.GetQuaternion2Vector(Vector2.right, direction);
         }
     }
 }
