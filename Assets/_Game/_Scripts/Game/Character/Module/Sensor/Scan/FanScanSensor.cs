@@ -13,8 +13,11 @@ namespace Dynamic.WorldInterface.Sensor
         [SerializeField] protected float viewAngle;
 
         #region Variable
+        private float edge1Deta = 0;
+        private float edge2Deta = 0;
         private float edge1Angle = 0;
         private float edge2Angle = 0;
+        private float middleAngle = 0;
         [Range(0f, 10f)]
         public float angleChangeVal = 2;
         [Range(0f, 10f)]
@@ -30,8 +33,11 @@ namespace Dynamic.WorldInterface.Sensor
         public override void Initialize(WorldInterfaceData Data, WorldInterfaceParameter Parameter)
         {
             base.Initialize(Data, Parameter);
-            edge1Angle = viewAngle;
-            edge2Angle = -viewAngle;
+            middleAngle = transform.parent.rotation.eulerAngles.z;
+            edge1Angle = viewAngle + middleAngle;
+            edge2Angle = -viewAngle + middleAngle;
+            edge1Deta = viewAngle;
+            edge2Deta = -viewAngle;
             SensorData = new FanScanSenorData();
             Data.SensorDatas.Add(SensorData);
         }
@@ -53,15 +59,20 @@ namespace Dynamic.WorldInterface.Sensor
 
         public virtual void Observation()
         {
+            RaycastHit2D hit;
+            hit = Physics2D.Raycast(eyePosition.position, MathHelper.AngleToVector(edge1Angle, Data.CharacterParameterData.IsFaceRight), viewRange);
+
             if (Mathf.Abs(edge1Angle) <= dispersion && Mathf.Abs(edge2Angle) <= dispersion)
             {
                 angleChangeVal = 0;
+                return;
             }
+            middleAngle = transform.parent.rotation.eulerAngles.z;
+            edge1Deta += -angleChangeVal * Time.deltaTime;
+            edge2Deta += angleChangeVal * Time.deltaTime;
 
-            RaycastHit2D hit;
-            hit = Physics2D.Raycast(eyePosition.position, MathHelper.AngleToVector(edge1Angle, Data.CharacterParameterData.IsFaceRight), viewRange);
-            edge1Angle += -angleChangeVal * Time.deltaTime;
-            edge2Angle += angleChangeVal * Time.deltaTime;
+            edge1Angle = middleAngle + edge1Deta;
+            edge2Angle = middleAngle + edge2Deta;
         }
     }
 }
