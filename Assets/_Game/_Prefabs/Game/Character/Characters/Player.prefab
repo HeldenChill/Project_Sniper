@@ -127,6 +127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Weapon
       objectReference: {fileID: 0}
+    - target: {fileID: 5061372893488068803, guid: c6ba2a64f3ac8a94587f61ddb5f67ace, type: 3}
+      propertyPath: angleChangeVal
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8390443144850398919, guid: c6ba2a64f3ac8a94587f61ddb5f67ace, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.157
