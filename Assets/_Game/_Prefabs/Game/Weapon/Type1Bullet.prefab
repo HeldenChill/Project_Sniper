@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Type1Bullet
       objectReference: {fileID: 0}
+    - target: {fileID: 5555626324964832152, guid: 2ecae4beea3e0f5438389d72d69735f6, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5555626324964832152, guid: 2ecae4beea3e0f5438389d72d69735f6, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 7287033456081514702, guid: 2ecae4beea3e0f5438389d72d69735f6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -90,4 +98,4 @@ MonoBehaviour:
   tf: {fileID: 50856641321568228}
   poolType: 0
   rb: {fileID: 6645796555580263890}
-  speed: 5
+  speed: 100

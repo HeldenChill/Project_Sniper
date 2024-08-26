@@ -46,6 +46,15 @@ namespace _Game.Character
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Fire"",
+                    ""type"": ""Button"",
+                    ""id"": ""1c49406d-254b-46d0-83b1-43737a299d0e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -92,6 +101,17 @@ namespace _Game.Character
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b28eefb2-52e0-4e0b-bf3f-d87f529f67a0"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -102,6 +122,7 @@ namespace _Game.Character
             m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
             m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
             m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
+            m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -165,12 +186,14 @@ namespace _Game.Character
         private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
         private readonly InputAction m_Player_Jump;
         private readonly InputAction m_Player_Movement;
+        private readonly InputAction m_Player_Fire;
         public struct PlayerActions
         {
             private @PlayerInputActions m_Wrapper;
             public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
             public InputAction @Jump => m_Wrapper.m_Player_Jump;
             public InputAction @Movement => m_Wrapper.m_Player_Movement;
+            public InputAction @Fire => m_Wrapper.m_Player_Fire;
             public InputActionMap Get() { return m_Wrapper.m_Player; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -186,6 +209,9 @@ namespace _Game.Character
                 @Movement.started += instance.OnMovement;
                 @Movement.performed += instance.OnMovement;
                 @Movement.canceled += instance.OnMovement;
+                @Fire.started += instance.OnFire;
+                @Fire.performed += instance.OnFire;
+                @Fire.canceled += instance.OnFire;
             }
 
             private void UnregisterCallbacks(IPlayerActions instance)
@@ -196,6 +222,9 @@ namespace _Game.Character
                 @Movement.started -= instance.OnMovement;
                 @Movement.performed -= instance.OnMovement;
                 @Movement.canceled -= instance.OnMovement;
+                @Fire.started -= instance.OnFire;
+                @Fire.performed -= instance.OnFire;
+                @Fire.canceled -= instance.OnFire;
             }
 
             public void RemoveCallbacks(IPlayerActions instance)
@@ -217,6 +246,7 @@ namespace _Game.Character
         {
             void OnJump(InputAction.CallbackContext context);
             void OnMovement(InputAction.CallbackContext context);
+            void OnFire(InputAction.CallbackContext context);
         }
     }
 }

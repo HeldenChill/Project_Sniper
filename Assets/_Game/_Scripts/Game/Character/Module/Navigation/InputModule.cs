@@ -18,6 +18,7 @@ namespace _Game.Character
             playerInputActions = new PlayerInputActions();
             playerInputActions.Player.Enable();
             playerInputActions.Player.Jump.performed += OnJump;
+            playerInputActions.Player.Fire.performed += OnFire;
         }
         public override void StartNavigation()
         {
@@ -37,6 +38,11 @@ namespace _Game.Character
         protected void OnJump(InputAction.CallbackContext callback)
         {
             Data.Jump.Value = true;
+        }
+
+        protected void OnFire(InputAction.CallbackContext callback) 
+        { 
+            Data.Fire.Value = true;
         }
     }
 }

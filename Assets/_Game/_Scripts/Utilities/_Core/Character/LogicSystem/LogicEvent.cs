@@ -55,6 +55,7 @@ namespace Utilities.Core.Character.LogicSystem
 
 
         public event Action<bool, float> _IgnoreCollision;
+        public event Action _OnFire;
 
         /// <summary>
         /// Set <c>Rotation</c> of character.
@@ -151,6 +152,10 @@ namespace Utilities.Core.Character.LogicSystem
             _AddTransformPosition?.Invoke(pos);
         }
 
+        public void Fire()
+        {
+            _OnFire?.Invoke();
+        }
         //public void InflictDamage(Type type, float damage, int frame = 1)
         //{
         //    if(frame <= 1)

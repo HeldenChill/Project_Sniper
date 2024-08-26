@@ -40,6 +40,10 @@ namespace _Game.Character
         public override bool Update()
         {
             if (!base.Update()) return false;
+            if (Parameter.NavData.Fire.Value)
+            {
+                Event.Fire();
+            }
             if(Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
             {
                 ChangeState(State.MOVE);

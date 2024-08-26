@@ -9,7 +9,7 @@ namespace _Game.Character
     {
         [SerializeField]
         BaseWeapon weapon;
-        public BaseWeapon BaseWeapon => weapon;
+        public BaseWeapon Weapon => weapon;
         protected override void Awake()
         {
             base.Awake();
@@ -30,6 +30,7 @@ namespace _Game.Character
             LogicSystem.Event._SetVelocityY += PhysicModule.SetVelocityY;
             LogicSystem.Event._SetVelocityYTime += PhysicModule.SetVelocityY;
             LogicSystem.Event._SetVelocityYFrame += PhysicModule.SetVelocityY;
+            LogicSystem.Event._OnFire += Weapon.Fire;
             #endregion
         }
 
@@ -43,6 +44,7 @@ namespace _Game.Character
             LogicSystem.Event._SetVelocityXFrame -= PhysicModule.SetVelocityX;
             LogicSystem.Event._SetVelocityYTime -= PhysicModule.SetVelocityY;
             LogicSystem.Event._SetVelocityYFrame -= PhysicModule.SetVelocityY;
+            LogicSystem.Event._OnFire -= Weapon.Fire;
             #endregion
         }
     }
