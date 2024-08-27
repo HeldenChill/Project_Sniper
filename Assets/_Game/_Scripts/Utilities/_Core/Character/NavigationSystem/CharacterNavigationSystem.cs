@@ -31,7 +31,7 @@ namespace Utilities.Core.Character.NavigationSystem
         #region ReceiveInformation Functions
         public virtual void ReceiveInformation(WorldInterfaceData worldInterface)
         {
-            Parameter.UpdateParameter(worldInterface);
+            
         }
         #endregion
     }
