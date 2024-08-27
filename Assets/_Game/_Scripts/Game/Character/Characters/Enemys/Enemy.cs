@@ -1,11 +1,14 @@
+using _Game.Character;
+using _Game;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Utilities.Core;
+
 
 namespace _Game.Character
 {
-    public class Player : BaseCharacter<CharacterStats>
+    using Utilities.Core;
+    public class Enemy : BaseCharacter<CharacterStats>
     {
         [SerializeField]
         BaseWeapon weapon;
@@ -35,7 +38,7 @@ namespace _Game.Character
         }
 
         protected override void OnDisable()
-        {        
+        {
             base.OnDisable();
             #region LOGIC MODULE --> PHYSIC MODULE
             LogicSystem.Event._SetVelocityTime -= PhysicModule.SetVelocity;

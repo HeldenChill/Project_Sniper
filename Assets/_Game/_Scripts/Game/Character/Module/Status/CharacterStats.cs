@@ -5,7 +5,7 @@ using UnityEngine;
 namespace _Game.Character
 {
     [CreateAssetMenu(fileName = "PlayerStatus", menuName = "Status Data/Player")]
-    public class PlayerStats : ScriptableObject
+    public class CharacterStats : ScriptableObject
     {
         [SerializeField]
         float speed;

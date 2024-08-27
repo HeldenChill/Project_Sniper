@@ -10,7 +10,7 @@ using Utilities.StateMachine;
 namespace _Game.Character
 {
     #region GROUNDED STATE
-    public abstract class GroundedState : BaseLogicState<PlayerStats>
+    public abstract class GroundedState : BaseLogicState<CharacterStats>
     {
         protected GroundedState(LogicParameter parameter, LogicData data, LogicEvent _event) 
             : base(parameter, data, _event)
@@ -94,7 +94,7 @@ namespace _Game.Character
         }
     }
     #endregion
-    public class JumpState : BaseLogicState<PlayerStats>
+    public class JumpState : BaseLogicState<CharacterStats>
     {
         bool isJumping = false;
         public JumpState(LogicParameter parameter, LogicData data, LogicEvent _event) 

@@ -32,7 +32,6 @@ namespace Utilities.Core
         [HideInInspector]
         public CharacterParameterData CharacterData;
 
-        [HideInInspector]
         protected virtual void Awake()
         {
             CharacterData = new CharacterParameterData();
