@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Game.Character
 {
-    [CreateAssetMenu(fileName = "PlayerStatus", menuName = "Status Data/Player")]
+    [CreateAssetMenu(fileName = "PlayerStatus", menuName = "Status Data/Character")]
     public class CharacterStats : ScriptableObject
     {
         [SerializeField]

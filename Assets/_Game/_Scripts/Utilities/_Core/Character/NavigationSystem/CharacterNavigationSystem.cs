@@ -14,7 +14,7 @@ namespace Utilities.Core.Character.NavigationSystem
     {
         #region System Components
         //NavigationDecision = Core
-        public AbstractNavigationModule InputModule { get => module; set => module = value; }
+        public AbstractNavigationModule Module { get => module; set => module = value; }
         #endregion
         #region Essential Functions
         protected CharacterNavigationSystem() { }
@@ -28,10 +28,17 @@ namespace Utilities.Core.Character.NavigationSystem
             module.Initialize(data, Parameter);
         }
         #endregion
+
+        //DEV: Need Change By Generic Class
+        public void SetNavigationData(NavigationData data)
+        {
+            this.data = data;
+            module.Initialize(data, Parameter);
+        }
         #region ReceiveInformation Functions
         public virtual void ReceiveInformation(WorldInterfaceData worldInterface)
         {
-            
+            Parameter.WIData = worldInterface;
         }
         #endregion
     }

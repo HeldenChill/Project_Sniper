@@ -8,8 +8,8 @@ namespace _Game.Character
     public class Player : BaseCharacter<CharacterStats>
     {
         [SerializeField]
-        BaseWeapon weapon;
-        public BaseWeapon Weapon => weapon;
+        PlayerWeapon weapon;
+        public PlayerWeapon Weapon => weapon;
         protected override void Awake()
         {
             base.Awake();

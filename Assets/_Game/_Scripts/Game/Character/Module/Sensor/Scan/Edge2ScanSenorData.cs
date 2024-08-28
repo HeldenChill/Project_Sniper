@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Dynamic.WorldInterface.Data
 {
     using Utilities.Core.Character.WorldInterfaceSystem;
-    public class FanScanSenorData : SensorData
+    public class Edge2SenorData : SensorData
     {
         public Vector2 Edge1Direction;
         public Vector2 Edge2Direction;

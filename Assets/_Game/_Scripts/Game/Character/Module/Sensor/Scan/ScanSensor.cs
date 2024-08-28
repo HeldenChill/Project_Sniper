@@ -15,7 +15,7 @@ namespace Dynamic.WorldInterface.Sensor
 
         #region Variable
         private float currentAngle = 0;
-        [Range(0f, 10f)]
+        [Range(0f, 100f)]
         public float angleChangeVal = 2;
         #endregion
 
@@ -53,7 +53,7 @@ namespace Dynamic.WorldInterface.Sensor
 
             RaycastHit2D hit;
             hit = Physics2D.Raycast(eyePosition.position, MathHelper.AngleToVector(currentAngle, Data.CharacterParameterData.IsFaceRight), viewRange);
-            currentAngle += angleChangeVal;
+            currentAngle += angleChangeVal * Time.deltaTime;
 
 
             if (!hit)
@@ -65,7 +65,7 @@ namespace Dynamic.WorldInterface.Sensor
             {
                 SensorData.DetectedObject = hit.collider.gameObject;
                 SensorData.HitTargetVector = (hit.point - (Vector2)eyePosition.position);
-                if (SensorData.DetectedObject.layer == LayerMask.NameToLayer("Fighter"))
+                if (SensorData.DetectedObject.layer == LayerMask.NameToLayer("Character"))
                 {
                     SensorData.AttackObjectVector = (hit.point - (Vector2)eyePosition.position);
                     SensorData.AttackObject = hit.collider.gameObject;

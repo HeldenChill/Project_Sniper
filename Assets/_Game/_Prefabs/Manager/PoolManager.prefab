@@ -46,8 +46,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolAmounts:
   - root: {fileID: 102571205692404310}
-    prefab: {fileID: 7307166154212539458, guid: b699931074cfe66418cd791bfa05e839, type: 3}
+    prefab: {fileID: 5130055086274218407, guid: b699931074cfe66418cd791bfa05e839, type: 3}
     amount: 15
-    collect: 0
+    collect: 1
+    clamp: 0
+  - root: {fileID: 102571205692404310}
+    prefab: {fileID: 7486196453121327406, guid: 60a18db84f132b6459475abae65dbe42, type: 3}
+    amount: 15
+    collect: 1
     clamp: 0
   _particleAmounts: []

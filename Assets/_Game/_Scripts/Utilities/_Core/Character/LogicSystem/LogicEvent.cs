@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Utilities.Core.Character.LogicSystem
 {
-    using Codice.Client.Common;
     using System;
-    public class LogicEvent : ScriptableObject
+    public class LogicEvent
     {
         /// <summary>
         /// Set <c>Velocity_x</c> for character in a period of time.

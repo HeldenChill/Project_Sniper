@@ -1,14 +1,15 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
-using Utilities.Core.Character.LogicSystem;
-using Utilities.Core.Character.WorldInterfaceSystem;
-using Utilities.StateMachine;
+
 
 namespace _Game.Character
 {
+    using Base;
+    using System;
+    using Utilities;
+    using Utilities.Core.Character.LogicSystem;
+    using Utilities.StateMachine;
     #region GROUNDED STATE
     public abstract class GroundedState : BaseLogicState<CharacterStats>
     {
@@ -137,6 +138,47 @@ namespace _Game.Character
         {
             Event.SetVelocityX(Math.Sign(Parameter.NavData.MoveDirection.x) * Stats.Speed);
             return base.FixedUpdate();
+        }
+    }
+
+    public class EnemyIdleState : IdleState
+    {
+        EnemyNavigationData NavData;
+        EnemyLogicEvent EEvent;
+        public EnemyIdleState(LogicParameter parameter, LogicData data, LogicEvent _event) : base(parameter, data, _event)
+        {
+           
+        }
+
+        public override State Id => State.IDLE;
+
+        public override void Enter()
+        {
+            base.Enter();
+            NavData = (EnemyNavigationData)Parameter.NavData;
+
+            if (Event is EnemyLogicEvent)
+                EEvent = Event as EnemyLogicEvent;
+            else
+                return;
+            NavData._OnAlertStateChange += OnAlertStateChange;
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            NavData._OnAlertStateChange -= OnAlertStateChange;
+        }
+
+        public override bool Update()
+        {
+            if(!base.Update()) return false;
+            return true;
+        }
+
+        protected void OnAlertStateChange(ALERT_STATE state)
+        {
+            EEvent.ChangeAlertState(state);
         }
     }
 }

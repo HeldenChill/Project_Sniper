@@ -350,5 +350,6 @@ namespace DesignPattern
     {
         NONE = -1,
         TYPE1_BULLET = 0,
+        ENEMY_BULLET = 1,
     }
 }

@@ -21,10 +21,17 @@ namespace Utilities.StateMachine
         public void Start(State id)
         {
             currentState = states[id];
+            currentState?.Enter();
             if (IsDebug)
             {
                 DevLog.Log(DevId.Hung, $"START: {id}");
             }
+        }
+
+        public void Stop()
+        {
+            currentState?.Exit();
+            currentState = null;
         }
         public void AddState(State id, BaseState state)
         {

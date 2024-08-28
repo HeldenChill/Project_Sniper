@@ -17,6 +17,10 @@ namespace _Game.Character
             Parameter = parameter;
             Data = data;
         }
+        public D GetData<D>() where D : NavigationData
+        {
+            return Data as D;
+        }
     }
 }
 

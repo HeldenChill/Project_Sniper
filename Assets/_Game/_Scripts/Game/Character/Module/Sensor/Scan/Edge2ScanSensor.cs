@@ -6,7 +6,7 @@ using Utilities.Core.Character.WorldInterfaceSystem;
 using Utilities;
 namespace Dynamic.WorldInterface.Sensor
 {
-    public class FanScanSensor : BaseSensor
+    public class Edge2ScanSensor : BaseSensor
     {
         [SerializeField] protected Transform eyePosition;
         [SerializeField] protected float viewRange;
@@ -24,14 +24,14 @@ namespace Dynamic.WorldInterface.Sensor
 
         #endregion
 
-        public FanScanSenorData SensorData
+        public Edge2SenorData SensorData
         {
             get; protected set;
         }
         public override void Initialize(WorldInterfaceData Data, WorldInterfaceParameter Parameter)
         {
             base.Initialize(Data, Parameter);
-            SensorData = new FanScanSenorData();
+            SensorData = new Edge2SenorData();
             Data.SensorDatas.Add(SensorData);
 
             middleAngle = transform.parent.rotation.eulerAngles.z;

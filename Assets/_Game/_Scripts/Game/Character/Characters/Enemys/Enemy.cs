@@ -11,12 +11,17 @@ namespace _Game.Character
     public class Enemy : BaseCharacter<CharacterStats>
     {
         [SerializeField]
-        BaseWeapon weapon;
-        public BaseWeapon Weapon => weapon;
+        DisplayModule displayModule;
+        [SerializeField]
+        EnemyWeapon weapon;
+        public EnemyWeapon Weapon => weapon;
         protected override void Awake()
         {
             base.Awake();
             weapon.Equip(WorldInterfaceModule, WorldInterfaceSystem.Data);
+            NavigationSystem.SetNavigationData(new EnemyNavigationData());
+            LogicSystem.ReceiveInformation(NavigationSystem.Data);
+            LogicSystem.SetLogicEvent(new EnemyLogicEvent());
         }
         protected override void OnEnable()
         {
@@ -33,7 +38,9 @@ namespace _Game.Character
             LogicSystem.Event._SetVelocityY += PhysicModule.SetVelocityY;
             LogicSystem.Event._SetVelocityYTime += PhysicModule.SetVelocityY;
             LogicSystem.Event._SetVelocityYFrame += PhysicModule.SetVelocityY;
+            ((EnemyLogicEvent)LogicSystem.Event)._OnAlertStateChange += displayModule.OnChangeAlertState;
             LogicSystem.Event._OnFire += Weapon.Fire;
+            NavigationSystem.Module.StartNavigation();
             #endregion
         }
 
@@ -47,6 +54,7 @@ namespace _Game.Character
             LogicSystem.Event._SetVelocityXFrame -= PhysicModule.SetVelocityX;
             LogicSystem.Event._SetVelocityYTime -= PhysicModule.SetVelocityY;
             LogicSystem.Event._SetVelocityYFrame -= PhysicModule.SetVelocityY;
+            ((EnemyLogicEvent)LogicSystem.Event)._OnAlertStateChange -= displayModule.OnChangeAlertState;
             LogicSystem.Event._OnFire -= Weapon.Fire;
             #endregion
         }

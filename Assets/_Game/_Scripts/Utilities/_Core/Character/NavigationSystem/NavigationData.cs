@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Utilities.Core.Character.NavigationSystem
 {
+    using System;
     using Utilities.Timer;
     public class Trigger
     {

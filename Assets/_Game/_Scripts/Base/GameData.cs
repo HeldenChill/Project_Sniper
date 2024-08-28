@@ -31,6 +31,15 @@ public static class Database
 
 namespace Base
 {
+    #region GAME
+    public enum ALERT_STATE
+    {
+        NONE = -1,
+        START = 0,
+        MED_ALERT = 1,
+        ALERT = 2,
+    }
+    #endregion
     public class GameData
     {
         public SettingData setting = new();

@@ -20,15 +20,19 @@ namespace Utilities.Core.Character.LogicSystem
         {
             data = new LogicData();
             Parameter = new LogicParameter();
-            Event = ScriptableObject.CreateInstance(typeof(LogicEvent)) as LogicEvent;
+            Event = new LogicEvent();
             this.module = module;
             data.CharacterParameterData = characterData;
             module.Initialize(data, Parameter, Event);
         }
 
-        
-        //Support Function
-        
+
+        //DEV: Need Change By Generic Class
+        public void SetLogicEvent(LogicEvent _event)
+        {
+            Event = _event;
+            ((AbstractLogicModule)module).Initialize(data, Parameter, Event);
+        }
 
 
         #region ReceiveInformation Functions
