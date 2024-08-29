@@ -8,20 +8,24 @@ namespace _Game.Character
     using Utilities.StateMachine;
     using System;
 
-    public class EnemyLogicModule : AbstractLogicModule
+    public class EnemyLogicModule : AbstractLogicModule<LogicData, LogicParameter, EnemyLogicEvent>
     {
         StateMachine stateMachine;
-        public override void Initialize(LogicData Data, LogicParameter Parameter, LogicEvent Event)
+        public override void Initialize(LogicData Data, LogicParameter Parameter, EnemyLogicEvent Event)
         {
             base.Initialize(Data, Parameter, Event);
 
             stateMachine = new StateMachine();
             stateMachine.IsDebug = true;
 
-            stateMachine.AddState(State.IDLE, new EnemyIdleState(Parameter, Data, Event));
-            stateMachine.AddState(State.MOVE, new MoveState(Parameter, Data, Event));
-            stateMachine.AddState(State.JUMP, new JumpState(Parameter, Data, Event));
+            stateMachine.AddState(State.IDLE, new EnemyIdleState(Data, Parameter, Event));
+            stateMachine.AddState(State.MOVE, new EnemyMoveState(Data, Parameter, Event));
+            stateMachine.AddState(State.JUMP, new EnemyJumpState(Data, Parameter, Event));
 
+        }
+
+        private void Start()
+        {
             stateMachine.Start(State.IDLE);
         }
         public override void UpdateData()

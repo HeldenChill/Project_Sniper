@@ -8,17 +8,15 @@ namespace _Game.Character
 {
     using Base;
     using Dynamic.WorldInterface.Data;
-    using Utilities;
     using Utilities.Core.Character.NavigationSystem;
     using Utilities.StateMachine;
     using Utilities.Timer;
-    public class NavAlertState : BaseNavigationState<CharacterStats>
+    public class NavAlertState : BaseNavigationState<CharacterStats, EnemyNavigationData, NavigationParameter>
     {
         protected ALERT_STATE state;
         protected ScanSensorData scanSensorData;
-        protected EnemyNavigationData enemyNavigationData;
         bool isSeeingObject;
-        public NavAlertState(NavigationParameter parameter, NavigationData data) : base(parameter, data)
+        public NavAlertState(EnemyNavigationData data, NavigationParameter parameter) : base(data, parameter)
         {
         }
 
@@ -26,7 +24,6 @@ namespace _Game.Character
 
         public override void Enter()
         {
-            enemyNavigationData = GetData<EnemyNavigationData>();
             scanSensorData = Parameter.WIData.GetSensorData<ScanSensorData>();
             isSeeingObject = true;
             ChangeAlertState(ALERT_STATE.START);
@@ -40,15 +37,14 @@ namespace _Game.Character
         public override bool Update()
         {
             //DevLog.Log(DevId.Hung, $"IS SEE = {isSeeingObject}, DETECTED: {scanSensorData.DetectedObject}");
-            if (isSeeingObject && scanSensorData.DetectedObject)
+            if (isSeeingObject && scanSensorData.AttackObject)
                 return false;
-            else if(isSeeingObject && !scanSensorData.DetectedObject)
+            else if(isSeeingObject && !scanSensorData.AttackObject)
             {
                 isSeeingObject = false;
             }
-            else if(!isSeeingObject && scanSensorData.DetectedObject)
+            else if(!isSeeingObject && scanSensorData.AttackObject)
             {
-                if (!scanSensorData.AttackObject) return true;
                 isSeeingObject = true;
                 if(state != ALERT_STATE.ALERT)
                 {
@@ -76,13 +72,13 @@ namespace _Game.Character
                     break;
             }
             this.state = state;
-            enemyNavigationData._OnAlertStateChange?.Invoke(state);
+            Data._OnAlertStateChange?.Invoke(state);
         }
     }
 
-    public class NavAttackState : BaseNavigationState<CharacterStats>
+    public class NavAttackState : BaseNavigationState<CharacterStats, EnemyNavigationData, NavigationParameter>
     {
-        public NavAttackState(NavigationParameter parameter, NavigationData data) : base(parameter, data)
+        public NavAttackState(EnemyNavigationData data, NavigationParameter parameter) : base(data, parameter)
         {
         }
 
@@ -104,9 +100,9 @@ namespace _Game.Character
         }
     }
 
-    public class NavPatrolState : BaseNavigationState<CharacterStats>
+    public class NavPatrolState : BaseNavigationState<CharacterStats, EnemyNavigationData, NavigationParameter>
     {
-        public NavPatrolState(NavigationParameter parameter, NavigationData data) : base(parameter, data)
+        public NavPatrolState(EnemyNavigationData data, NavigationParameter parameter) : base(data, parameter)
         {
         }
 
@@ -130,11 +126,11 @@ namespace _Game.Character
     }
 
 
-    public class NavIdleState : BaseNavigationState<CharacterStats>
+    public class NavIdleState : BaseNavigationState<CharacterStats, EnemyNavigationData, NavigationParameter>
     {
         STimer waitTimer;
         ScanSensorData scanSensorData;
-        public NavIdleState(NavigationParameter parameter, NavigationData data) : base(parameter, data)
+        public NavIdleState(EnemyNavigationData data, NavigationParameter parameter) : base(data, parameter)
         {
             waitTimer = TimerManager.Ins.PopSTimer();
         }

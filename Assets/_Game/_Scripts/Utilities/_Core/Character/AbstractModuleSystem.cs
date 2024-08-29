@@ -6,7 +6,7 @@ namespace Utilities.Core.Character
 {
     [DefaultExecutionOrder(15)]
     public abstract class AbstractModuleSystem<D, P> : MonoBehaviour
-        where D : AbstractDataSystem<D>
+        where D : AbstractDataSystem
         where P : AbstractParameterSystem
     {
         protected D Data;
@@ -18,6 +18,5 @@ namespace Utilities.Core.Character
         {
 
         }
-
     }
 }

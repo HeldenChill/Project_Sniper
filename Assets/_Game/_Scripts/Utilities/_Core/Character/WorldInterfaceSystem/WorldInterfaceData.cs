@@ -6,7 +6,7 @@ namespace Utilities.Core.Character.WorldInterfaceSystem
 {
     using Utilities.Core.Character;
     public abstract class SensorData { }
-    public class WorldInterfaceData : AbstractDataSystem<WorldInterfaceData>
+    public class WorldInterfaceData : AbstractDataSystem
     {
         //Can improve performance by check value change or not
         public bool IsGrounded;

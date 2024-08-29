@@ -7,7 +7,7 @@ namespace Utilities.Core.Character
     using System;
     public abstract class AbstractCharacterSystem<M,D,P>
         where M : AbstractModuleSystem<D,P>
-        where D : AbstractDataSystem<D>
+        where D : AbstractDataSystem
         where P : AbstractParameterSystem
     {
         protected M module;

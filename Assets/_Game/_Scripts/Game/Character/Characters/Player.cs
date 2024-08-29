@@ -1,11 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using Utilities.Core;
+
 
 namespace _Game.Character
 {
-    public class Player : BaseCharacter<CharacterStats>
+    using UnityEngine;
+    using Utilities.Core;
+    using Utilities.Core.Character.LogicSystem;
+    using Utilities.Core.Character.NavigationSystem;
+    public class Player : BaseCharacter<CharacterStats, 
+        LogicData, LogicParameter, LogicEvent,
+        NavigationData, NavigationParameter>
     {
         [SerializeField]
         PlayerWeapon weapon;

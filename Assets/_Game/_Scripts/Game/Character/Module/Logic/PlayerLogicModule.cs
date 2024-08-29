@@ -8,7 +8,7 @@ namespace _Game.Character
     using Utilities.StateMachine;
     using System;
 
-    public class PlayerLogicModule : AbstractLogicModule
+    public class PlayerLogicModule : AbstractLogicModule<LogicData, LogicParameter, LogicEvent>
     {
         StateMachine stateMachine;
         public override void Initialize(LogicData Data, LogicParameter Parameter, LogicEvent Event)
@@ -16,11 +16,14 @@ namespace _Game.Character
             base.Initialize(Data, Parameter, Event);
 
             stateMachine = new StateMachine();
-            stateMachine.AddState(State.IDLE ,new IdleState(Parameter, Data, Event));
-            stateMachine.AddState(State.MOVE, new  MoveState(Parameter, Data, Event));  
-            stateMachine.AddState(State.JUMP, new  JumpState(Parameter, Data, Event));
-
+            stateMachine.AddState(State.IDLE ,new PlayerIdleState(Data, Parameter, Event));
+            stateMachine.AddState(State.MOVE, new  PlayerMoveState(Data, Parameter, Event));  
+            stateMachine.AddState(State.JUMP, new  PlayerJumpState(Data, Parameter, Event));
+        }
+        private void Start()
+        {
             stateMachine.Start(State.IDLE);
+
         }
         public override void UpdateData()
         {

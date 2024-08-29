@@ -8,7 +8,12 @@ using UnityEngine;
 namespace _Game.Character
 {
     using Utilities.Core;
-    public class Enemy : BaseCharacter<CharacterStats>
+    using Utilities.Core.Character.LogicSystem;
+    using Utilities.Core.Character.NavigationSystem;
+
+    public class Enemy : BaseCharacter<CharacterStats, 
+        LogicData, LogicParameter, EnemyLogicEvent,
+        EnemyNavigationData, NavigationParameter>
     {
         [SerializeField]
         DisplayModule displayModule;
@@ -19,9 +24,6 @@ namespace _Game.Character
         {
             base.Awake();
             weapon.Equip(WorldInterfaceModule, WorldInterfaceSystem.Data);
-            NavigationSystem.SetNavigationData(new EnemyNavigationData());
-            LogicSystem.ReceiveInformation(NavigationSystem.Data);
-            LogicSystem.SetLogicEvent(new EnemyLogicEvent());
         }
         protected override void OnEnable()
         {

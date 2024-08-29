@@ -10,31 +10,27 @@ namespace Utilities.Core.Character.NavigationSystem
     /// <summary>
     /// Responsibility for navigating the Dynamic Object (Player or Agent) 
     /// </summary>
-    public class CharacterNavigationSystem : AbstractCharacterSystem<AbstractNavigationModule, NavigationData, NavigationParameter>
+    public class CharacterNavigationSystem<D, P> : AbstractCharacterSystem<AbstractNavigationModule<D, P>, D, P>
+        where D : NavigationData, new()
+        where P : NavigationParameter, new()
     {
         #region System Components
         //NavigationDecision = Core
-        public AbstractNavigationModule Module { get => module; set => module = value; }
+        public AbstractNavigationModule<D, P> Module { get => module; set => module = value; }
         #endregion
         #region Essential Functions
         protected CharacterNavigationSystem() { }
         //Initialize
-        public CharacterNavigationSystem(AbstractNavigationModule inputModule, CharacterParameterData characterData)
+        public CharacterNavigationSystem(AbstractNavigationModule<D, P> module, CharacterParameterData characterData)
         {
-            data = new NavigationData();
-            Parameter = new NavigationParameter();
-            this.module = inputModule;
+            data = new D();
+            Parameter = new P();
+            this.module = module;
             data.CharacterParameterData = characterData;
-            module.Initialize(data, Parameter);
+            base.module.Initialize(data, Parameter);
         }
         #endregion
 
-        //DEV: Need Change By Generic Class
-        public void SetNavigationData(NavigationData data)
-        {
-            this.data = data;
-            module.Initialize(data, Parameter);
-        }
         #region ReceiveInformation Functions
         public virtual void ReceiveInformation(WorldInterfaceData worldInterface)
         {

@@ -10,23 +10,30 @@ namespace Utilities.Core
     using Utilities.Core.Character.LogicSystem;
     using Utilities.Core.Character.PhysicSystem;
 
-    public class BaseCharacter<T> : MonoBehaviour where T : ScriptableObject
+    public class BaseCharacter<T, 
+        LD, LP, LE,
+        ND, NP> : MonoBehaviour where T : ScriptableObject
+        where LD : LogicData, new()
+        where LP : LogicParameter, new()
+        where LE : LogicEvent, new()
+        where ND : NavigationData, new()
+        where NP : NavigationParameter, new()
     {
         [SerializeField]
         protected T Stats;
         [SerializeField]
         protected WorldInterfaceModule WorldInterfaceModule;
         [SerializeField]
-        protected AbstractNavigationModule NavigationModule;
+        protected AbstractNavigationModule<ND, NP> NavigationModule;
         [SerializeField]
-        protected AbstractLogicModule LogicModule;
+        protected AbstractLogicModule<LD, LP, LE> LogicModule;
         [SerializeField]
         protected AbstractPhysicModule PhysicModule;
 
 
         protected CharacterWorldInterfaceSystem WorldInterfaceSystem;
-        protected CharacterNavigationSystem NavigationSystem;
-        public CharacterLogicSystem LogicSystem;
+        protected CharacterNavigationSystem<ND, NP> NavigationSystem;
+        public CharacterLogicSystem<LD, LP, LE> LogicSystem;
         protected CharacterPhysicSystem PhysicSystem;
 
         [HideInInspector]
@@ -36,8 +43,8 @@ namespace Utilities.Core
         {
             CharacterData = new CharacterParameterData();
             WorldInterfaceSystem = new CharacterWorldInterfaceSystem(WorldInterfaceModule, CharacterData);
-            NavigationSystem = new CharacterNavigationSystem(NavigationModule, CharacterData);
-            LogicSystem = new CharacterLogicSystem(LogicModule, CharacterData);
+            NavigationSystem = new CharacterNavigationSystem<ND, NP>(NavigationModule, CharacterData);
+            LogicSystem = new CharacterLogicSystem<LD, LP, LE>(LogicModule, CharacterData);
             PhysicSystem = new CharacterPhysicSystem(PhysicModule, CharacterData);                   
         }
       

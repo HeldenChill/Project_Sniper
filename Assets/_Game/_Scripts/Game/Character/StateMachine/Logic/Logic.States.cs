@@ -10,17 +10,22 @@ namespace _Game.Character
     using Utilities;
     using Utilities.Core.Character.LogicSystem;
     using Utilities.StateMachine;
+    #region BASE STATE
+
     #region GROUNDED STATE
-    public abstract class GroundedState : BaseLogicState<CharacterStats>
+    public abstract class GroundedState<D, P, E> : BaseLogicState<CharacterStats, D, P, E>
+        where D : LogicData
+        where P : LogicParameter
+        where E : LogicEvent
     {
-        protected GroundedState(LogicParameter parameter, LogicData data, LogicEvent _event) 
-            : base(parameter, data, _event)
+        protected GroundedState(D data, P parameter, E _event)
+            : base(data, parameter, _event)
         {
         }
 
         public override bool Update()
         {
-             if (Parameter.WIData.IsGrounded && Parameter.NavData.Jump.Value)
+            if (Parameter.WIData.IsGrounded && Parameter.NavData.Jump.Value)
             {
                 ChangeState(State.JUMP);
                 return false;
@@ -28,12 +33,15 @@ namespace _Game.Character
             return true;
         }
     }
-    public class IdleState : GroundedState
+    public abstract class IdleState<D, P, E> : GroundedState<D, P, E>
+        where D: LogicData
+        where P : LogicParameter
+        where E : LogicEvent
     {
         public override State Id => State.IDLE;
 
-        public IdleState(LogicParameter parameter, LogicData data, LogicEvent _event) 
-            : base(parameter, data, _event) { }
+        public IdleState(D data, P parameter, E _event)
+            : base(data, parameter, _event) { }
         public override void Enter()
         {
             Event.SetVelocity(Vector2.zero);
@@ -45,7 +53,7 @@ namespace _Game.Character
             {
                 Event.Fire();
             }
-            if(Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
+            if (Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
             {
                 ChangeState(State.MOVE);
                 return true;
@@ -54,15 +62,18 @@ namespace _Game.Character
         }
         public override void Exit()
         {
-            
+
         }
 
-        
+
     }
-    public class MoveState : GroundedState
+    public abstract class MoveState<D, P, E> : GroundedState<D, P, E>
+        where D : LogicData
+        where P : LogicParameter
+        where E : LogicEvent
     {
-        public MoveState(LogicParameter parameter, LogicData data, LogicEvent _event) 
-            : base(parameter, data, _event)
+        public MoveState(D data, P parameter, E _event)
+            : base(data, parameter, _event)
         {
         }
 
@@ -75,13 +86,13 @@ namespace _Game.Character
 
         public override void Exit()
         {
-            
+
         }
 
         public override bool Update()
         {
             if (!base.Update()) return false;
-            if(Parameter.NavData.MoveDirection.sqrMagnitude < 0.0001f)
+            if (Parameter.NavData.MoveDirection.sqrMagnitude < 0.0001f)
             {
                 ChangeState(State.IDLE);
             }
@@ -95,11 +106,14 @@ namespace _Game.Character
         }
     }
     #endregion
-    public class JumpState : BaseLogicState<CharacterStats>
+    public abstract class JumpState<D, P, E> : BaseLogicState<CharacterStats, D, P, E>
+        where D : LogicData
+        where P : LogicParameter
+        where E : LogicEvent
     {
         bool isJumping = false;
-        public JumpState(LogicParameter parameter, LogicData data, LogicEvent _event) 
-            : base(parameter, data, _event)
+        public JumpState(D data, P parameter, E _event)
+            : base(data, parameter, _event)
         {
         }
 
@@ -113,16 +127,16 @@ namespace _Game.Character
 
         public override void Exit()
         {
-            
+
         }
 
         public override bool Update()
         {
             isJumping = !Parameter.WIData.IsGrounded || isJumping;
-            if(!isJumping) return false;
+            if (!isJumping) return false;
             if (Parameter.WIData.IsGrounded)
             {
-                if(Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
+                if (Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
                 {
                     ChangeState(State.MOVE);
                 }
@@ -140,14 +154,34 @@ namespace _Game.Character
             return base.FixedUpdate();
         }
     }
-
-    public class EnemyIdleState : IdleState
+    #endregion
+    #region PLAYER STATE
+    public class PlayerIdleState : IdleState<LogicData, LogicParameter, LogicEvent>
+    {
+        public PlayerIdleState(LogicData data, LogicParameter parameter, LogicEvent _event) : base(data, parameter, _event)
+        {
+        }
+    }
+    public class PlayerMoveState : MoveState<LogicData, LogicParameter, LogicEvent>
+    {
+        public PlayerMoveState(LogicData data, LogicParameter parameter, LogicEvent _event) : base(data, parameter, _event)
+        {
+        }
+    }
+    public class PlayerJumpState : JumpState<LogicData, LogicParameter, LogicEvent>
+    {
+        public PlayerJumpState(LogicData data, LogicParameter parameter, LogicEvent _event) : base(data, parameter, _event)
+        {
+        }
+    }
+    #endregion
+    #region ENEMY STATE
+    public class EnemyIdleState : IdleState<LogicData, LogicParameter, EnemyLogicEvent>
     {
         EnemyNavigationData NavData;
-        EnemyLogicEvent EEvent;
-        public EnemyIdleState(LogicParameter parameter, LogicData data, LogicEvent _event) : base(parameter, data, _event)
+        public EnemyIdleState(LogicData data, LogicParameter parameter, EnemyLogicEvent _event) : base(data, parameter, _event)
         {
-           
+
         }
 
         public override State Id => State.IDLE;
@@ -156,11 +190,6 @@ namespace _Game.Character
         {
             base.Enter();
             NavData = (EnemyNavigationData)Parameter.NavData;
-
-            if (Event is EnemyLogicEvent)
-                EEvent = Event as EnemyLogicEvent;
-            else
-                return;
             NavData._OnAlertStateChange += OnAlertStateChange;
         }
 
@@ -172,13 +201,26 @@ namespace _Game.Character
 
         public override bool Update()
         {
-            if(!base.Update()) return false;
+            if (!base.Update()) return false;
             return true;
         }
 
         protected void OnAlertStateChange(ALERT_STATE state)
         {
-            EEvent.ChangeAlertState(state);
+            Event.ChangeAlertState(state);
         }
     }
+    public class EnemyMoveState : MoveState<LogicData, LogicParameter, EnemyLogicEvent>
+    {
+        public EnemyMoveState(LogicData data, LogicParameter parameter, EnemyLogicEvent _event) : base(data, parameter, _event)
+        {
+        }
+    }
+    public class EnemyJumpState : JumpState<LogicData, LogicParameter, EnemyLogicEvent>
+    {
+        public EnemyJumpState(LogicData data, LogicParameter parameter, EnemyLogicEvent _event) : base(data, parameter, _event)
+        {
+        }
+    }
+    #endregion
 }

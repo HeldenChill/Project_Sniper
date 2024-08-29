@@ -19,7 +19,7 @@ namespace Utilities.Core.Character.NavigationSystem
             }
         }
     }
-    public class NavigationData : AbstractDataSystem<NavigationData>
+    public class NavigationData : AbstractDataSystem
     {
         public bool Attack1 = false;
         public bool Attack2 = false;

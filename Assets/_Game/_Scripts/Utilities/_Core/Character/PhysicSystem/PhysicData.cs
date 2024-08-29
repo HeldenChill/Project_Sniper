@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Utilities.Core.Character.PhysicSystem
 {
-    public class PhysicData : AbstractDataSystem<PhysicData>
+    public class PhysicData : AbstractDataSystem
     {
 
     }

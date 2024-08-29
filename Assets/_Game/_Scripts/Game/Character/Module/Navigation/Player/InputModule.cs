@@ -8,7 +8,7 @@ namespace _Game.Character
     using Utilities;
     using Utilities.Core.Character.NavigationSystem;
 
-    public class InputModule : AbstractNavigationModule
+    public class InputModule : AbstractNavigationModule<NavigationData, NavigationParameter>
     {
 
         PlayerInputActions playerInputActions;

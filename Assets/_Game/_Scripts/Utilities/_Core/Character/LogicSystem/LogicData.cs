@@ -1,6 +1,6 @@
 namespace Utilities.Core.Character.LogicSystem
 {
-    public class LogicData : AbstractDataSystem<LogicData>
+    public class LogicData : AbstractDataSystem
     {
         public int RemainingJump;
 

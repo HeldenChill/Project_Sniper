@@ -12,28 +12,22 @@ namespace Utilities.Core.Character.LogicSystem
     /// <summary>
     /// Responsibility for updating interaction logic between DynamicObject and the game world
     /// </summary>
-    public class CharacterLogicSystem : AbstractCharacterSystem<AbstractModuleSystem<LogicData, LogicParameter>, LogicData, LogicParameter>
+    public class CharacterLogicSystem<D, P, E> : AbstractCharacterSystem<AbstractModuleSystem<D, P>, D, P>
+        where D : LogicData, new()
+        where P : LogicParameter, new()
+        where E : LogicEvent, new()
     {
         //Initialize
-        public LogicEvent Event;
-        public CharacterLogicSystem(AbstractLogicModule module, CharacterParameterData characterData)
+        public E Event;
+        public CharacterLogicSystem(AbstractLogicModule<D, P, E> module, CharacterParameterData characterData)
         {
-            data = new LogicData();
-            Parameter = new LogicParameter();
-            Event = new LogicEvent();
+            data = new D();
+            Parameter = new P();
+            Event = new E();
             this.module = module;
             data.CharacterParameterData = characterData;
             module.Initialize(data, Parameter, Event);
         }
-
-
-        //DEV: Need Change By Generic Class
-        public void SetLogicEvent(LogicEvent _event)
-        {
-            Event = _event;
-            ((AbstractLogicModule)module).Initialize(data, Parameter, Event);
-        }
-
 
         #region ReceiveInformation Functions
         //Need to update this ReceiveInformation

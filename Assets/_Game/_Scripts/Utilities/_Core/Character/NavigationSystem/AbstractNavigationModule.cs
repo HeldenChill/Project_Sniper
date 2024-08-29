@@ -4,9 +4,11 @@ using UnityEngine;
 
 namespace Utilities.Core.Character.NavigationSystem
 {
-    public abstract class AbstractNavigationModule : AbstractModuleSystem<NavigationData,NavigationParameter>
+    public abstract class AbstractNavigationModule<D, P> : AbstractModuleSystem<D, P>
+        where D: NavigationData
+        where P : NavigationParameter
     { 
-        public override void Initialize(NavigationData Data,NavigationParameter Parameter)
+        public override void Initialize(D Data,P Parameter)
         {
             this.Data = Data;
             this.Parameter = Parameter;

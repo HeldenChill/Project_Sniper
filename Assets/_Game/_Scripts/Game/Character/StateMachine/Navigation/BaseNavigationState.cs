@@ -6,20 +6,18 @@ namespace _Game.Character
 {
     using Utilities.Core.Character.NavigationSystem;
     using Utilities.StateMachine;
-    public abstract class BaseNavigationState<T> : BaseState where T : ScriptableObject
+    public abstract class BaseNavigationState<T, D, P> : BaseState where T : ScriptableObject
+        where D : NavigationData
+        where P : NavigationParameter
     {
-        protected NavigationParameter Parameter;
-        protected NavigationData Data;
+        protected P Parameter;
+        protected D Data;
         private T stats;
         public T Stats => stats ??= Parameter.GetStats<T>();
-        public BaseNavigationState(NavigationParameter parameter, NavigationData data)
+        public BaseNavigationState(D data, P parameter)
         {
             Parameter = parameter;
             Data = data;
-        }
-        public D GetData<D>() where D : NavigationData
-        {
-            return Data as D;
         }
     }
 }

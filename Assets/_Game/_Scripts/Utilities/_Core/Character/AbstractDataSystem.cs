@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Utilities.Core.Character
 {
-    public abstract class AbstractDataSystem<D> 
+    public abstract class AbstractDataSystem
     {
         public CharacterParameterData CharacterParameterData;
     }

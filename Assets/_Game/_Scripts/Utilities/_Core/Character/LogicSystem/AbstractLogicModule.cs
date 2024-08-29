@@ -4,17 +4,20 @@ using UnityEngine;
 
 namespace Utilities.Core.Character.LogicSystem
 {
-    public abstract class AbstractLogicModule : AbstractModuleSystem<LogicData,LogicParameter>
+    public abstract class AbstractLogicModule<D, P, E> : AbstractModuleSystem<D, P>
+        where D : LogicData
+        where P : LogicParameter 
+        where E : LogicEvent
     {
-        protected LogicEvent Event;
+        protected E Event;
         
-        public override void Initialize(LogicData Data,LogicParameter Parameter)
+        public override void Initialize(D Data, P Parameter)
         {
             this.Parameter = Parameter;
             this.Data = Data;
         }
 
-        public virtual void Initialize(LogicData Data, LogicParameter Parameter, LogicEvent Event)
+        public virtual void Initialize(D Data, P Parameter, E Event)
         {
             this.Event = Event;
             Initialize(Data, Parameter);

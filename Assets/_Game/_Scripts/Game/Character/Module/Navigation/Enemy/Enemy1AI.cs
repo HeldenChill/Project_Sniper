@@ -8,10 +8,10 @@ namespace _Game.Character
 {
     using Utilities.Core.Character.NavigationSystem;
     using Utilities.StateMachine;
-    public class Enemy1AI : AbstractNavigationModule
+    public class Enemy1AI : AbstractNavigationModule<EnemyNavigationData, NavigationParameter>
     {
         StateMachine decision;
-        public override void Initialize(NavigationData Data, NavigationParameter Parameter)
+        public override void Initialize(EnemyNavigationData Data, NavigationParameter Parameter)
         {
             base.Initialize(Data, Parameter);
             decision = new StateMachine();
@@ -35,10 +35,10 @@ namespace _Game.Character
 
         private void AddStates(StateMachine stateMachine)
         {
-            stateMachine.AddState(State.NAV_IDLE ,new NavIdleState(Parameter, Data));
-            stateMachine.AddState(State.NAV_ATTACK ,new NavAttackState(Parameter, Data));
-            stateMachine.AddState(State.NAV_PATROL ,new NavPatrolState(Parameter, Data));
-            stateMachine.AddState(State.NAV_ALERT ,new NavAlertState(Parameter, Data));
+            stateMachine.AddState(State.NAV_IDLE ,new NavIdleState(Data, Parameter));
+            stateMachine.AddState(State.NAV_ATTACK ,new NavAttackState(Data, Parameter));
+            stateMachine.AddState(State.NAV_PATROL ,new NavPatrolState(Data, Parameter));
+            stateMachine.AddState(State.NAV_ALERT ,new NavAlertState(Data, Parameter));
         }
     }
 }
