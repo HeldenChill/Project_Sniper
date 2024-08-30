@@ -12,13 +12,6 @@ namespace Utilities.Core.Character.NavigationSystem
         private ScriptableObject stats;
         public WorldInterfaceData WIData;
 
-        public void SetStats<T>(T value) where T : ScriptableObject
-        {
-            stats = value;
-        }
-        public T GetStats<T>() where T : ScriptableObject
-        {
-            return (T)stats;
-        }
+        
     }
 }

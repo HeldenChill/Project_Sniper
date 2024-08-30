@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace Utilities.Core.Character.NavigationSystem
 {
+    using System;
     using Utilities.Core.Character;
     using Utilities.Core.Character.LogicSystem;
     using Utilities.Core.Character.WorldInterfaceSystem;
+    using Utilities.Core.Data;
 
     /// <summary>
     /// Responsibility for navigating the Dynamic Object (Player or Agent) 
@@ -35,6 +37,11 @@ namespace Utilities.Core.Character.NavigationSystem
         public virtual void ReceiveInformation(WorldInterfaceData worldInterface)
         {
             Parameter.WIData = worldInterface;
+        }
+
+        internal void ReceiveInformation<T>(T stats) where T : CharacterStats
+        {
+            Parameter.SetStats(stats);
         }
         #endregion
     }

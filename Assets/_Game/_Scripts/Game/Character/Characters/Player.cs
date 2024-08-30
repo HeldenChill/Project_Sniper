@@ -8,6 +8,8 @@ namespace _Game.Character
     using Utilities.Core;
     using Utilities.Core.Character.LogicSystem;
     using Utilities.Core.Character.NavigationSystem;
+    using Utilities.Core.Data;
+
     public class Player : BaseCharacter<CharacterStats, 
         LogicData, LogicParameter, LogicEvent,
         NavigationData, NavigationParameter>

@@ -8,6 +8,7 @@ namespace Utilities.Core.Character.LogicSystem
     using PhysicSystem;
     using Utilities.Core.Character;
     using System;
+    using Utilities.Core.Data;
 
     /// <summary>
     /// Responsibility for updating interaction logic between DynamicObject and the game world
@@ -45,7 +46,7 @@ namespace Utilities.Core.Character.LogicSystem
             Parameter.NavData = navigation;
         }       
 
-        public void ReceiveInformation(ScriptableObject stats)
+        public void ReceiveInformation<T>(T stats) where T : CharacterStats
         {
             Parameter.SetStats(stats);
         }

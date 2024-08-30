@@ -11,7 +11,7 @@ namespace _Game.Character
     using Utilities.Core.Character.NavigationSystem;
     using Utilities.StateMachine;
     using Utilities.Timer;
-    public class NavAlertState : BaseNavigationState<CharacterStats, EnemyNavigationData, NavigationParameter>
+    public class NavAlertState : BaseNavigationState<EnemyStats, EnemyNavigationData, NavigationParameter>
     {
         protected ALERT_STATE state;
         protected ScanSensorData scanSensorData;
@@ -76,7 +76,7 @@ namespace _Game.Character
         }
     }
 
-    public class NavAttackState : BaseNavigationState<CharacterStats, EnemyNavigationData, NavigationParameter>
+    public class NavAttackState : BaseNavigationState<EnemyStats, EnemyNavigationData, NavigationParameter>
     {
         public NavAttackState(EnemyNavigationData data, NavigationParameter parameter) : base(data, parameter)
         {
@@ -100,33 +100,82 @@ namespace _Game.Character
         }
     }
 
-    public class NavPatrolState : BaseNavigationState<CharacterStats, EnemyNavigationData, NavigationParameter>
+    public class NavPatrolState : BaseNavigationState<EnemyStats, EnemyNavigationData, NavigationParameter>
     {
+        STimer timer;
+        DetectGroundEdgeData groundEdgeData;
+        public readonly List<Vector2> CAN_MOVE_DIRS;
+        Vector2 direction;
+        float changeTime;
         public NavPatrolState(EnemyNavigationData data, NavigationParameter parameter) : base(data, parameter)
         {
+            CAN_MOVE_DIRS = new List<Vector2>();
         }
 
         public override State Id => State.NAV_PATROL;
 
         public override void Enter()
         {
-            
+            timer = TimerManager.Ins.PopSTimer();
+            groundEdgeData = Parameter.WIData.GetSensorData<DetectGroundEdgeData>();
+            UpdatePatrol();
         }
 
         public override void Exit()
         {
-            
+            timer.Stop();
+            TimerManager.Ins.PushSTimer(timer);
+            timer = null;
         }
 
         public override bool Update()
         {
-            return true;
+            if (!groundEdgeData.LeftEdgeDetected)
+            {
+                if(direction.x < 0)
+                {
+                    direction = Vector2.right;
+                    Data.MoveDirection = direction;
+                }
+            }
 
+            if(!groundEdgeData.RightEdgeDetected)
+            {
+                if(direction.x > 0)
+                {
+                    direction = Vector2.left;
+                    Data.MoveDirection = direction;
+                }
+            }
+            return true;
+        }
+
+        protected void UpdateRandomPropertys()
+        {
+            CAN_MOVE_DIRS.Clear();
+            if (groundEdgeData.LeftEdgeDetected)
+            {
+                CAN_MOVE_DIRS.Add(Vector2.left);
+            }
+
+            if(groundEdgeData.RightEdgeDetected)
+            {
+                CAN_MOVE_DIRS.Add(Vector2.right);
+            }
+
+            changeTime = Random.Range(Stats.Hidden.MinTimePatrol, Stats.Hidden.MaxTimePatrol);
+            direction = CAN_MOVE_DIRS[Random.Range(0, CAN_MOVE_DIRS.Count)];
+        }
+        protected void UpdatePatrol()
+        {
+            UpdateRandomPropertys();
+            Data.MoveDirection = direction;
+            timer.Start(changeTime, UpdatePatrol);
         }
     }
 
 
-    public class NavIdleState : BaseNavigationState<CharacterStats, EnemyNavigationData, NavigationParameter>
+    public class NavIdleState : BaseNavigationState<EnemyStats, EnemyNavigationData, NavigationParameter>
     {
         STimer waitTimer;
         ScanSensorData scanSensorData;
@@ -140,7 +189,7 @@ namespace _Game.Character
         public override void Enter()
         {
             scanSensorData = Parameter.WIData.GetSensorData<ScanSensorData>();
-            float waitTime = Random.Range(1f, 6f);
+            float waitTime = Random.Range(Stats.Hidden.MinTimeIdle, Stats.Hidden.MaxTimeIdle);
             waitTimer.Start(waitTime, () => ChangeState(State.NAV_PATROL));
         }
 
@@ -152,10 +201,9 @@ namespace _Game.Character
 
         public override bool Update()
         {
-            scanSensorData ??= Parameter.WIData.GetSensorData<ScanSensorData>();
             if(scanSensorData == null) return false;
 
-            if (scanSensorData.DetectedObject)
+            if (scanSensorData.AttackObject)
             {
                 waitTimer.Stop();
                 ChangeState(State.NAV_ALERT);

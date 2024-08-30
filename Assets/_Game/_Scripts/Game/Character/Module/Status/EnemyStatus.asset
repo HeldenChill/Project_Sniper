@@ -9,8 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15cc24de6aea0224eaa308d909655fc5, type: 3}
-  m_Name: EnemyStats
+  m_Script: {fileID: 11500000, guid: 49dac0073ca2b5742a8cadad731a467b, type: 3}
+  m_Name: EnemyStatus
   m_EditorClassIdentifier: 
   speed: 5
   jumpSpeed: 10
+  hidden:
+    maxTimePatrol: 6
+    minTimePatrol: 2
+    maxTimeIdle: 3
+    minTimeIdle: 1

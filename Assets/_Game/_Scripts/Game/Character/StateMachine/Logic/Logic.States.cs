@@ -7,7 +7,8 @@ namespace _Game.Character
 {
     using Base;
     using System;
-    using Utilities;
+    using Utilities.Core.Data;
+
     using Utilities.Core.Character.LogicSystem;
     using Utilities.StateMachine;
     #region BASE STATE

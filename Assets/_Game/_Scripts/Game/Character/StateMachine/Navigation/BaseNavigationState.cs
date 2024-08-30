@@ -5,8 +5,9 @@ using UnityEngine;
 namespace _Game.Character
 {
     using Utilities.Core.Character.NavigationSystem;
+    using Utilities.Core.Data;
     using Utilities.StateMachine;
-    public abstract class BaseNavigationState<T, D, P> : BaseState where T : ScriptableObject
+    public abstract class BaseNavigationState<T, D, P> : BaseState where T : CharacterStats
         where D : NavigationData
         where P : NavigationParameter
     {

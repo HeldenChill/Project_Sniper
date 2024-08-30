@@ -9,10 +9,11 @@ namespace Utilities.Core
     using Utilities.Core.Character.NavigationSystem;    
     using Utilities.Core.Character.LogicSystem;
     using Utilities.Core.Character.PhysicSystem;
+    using Utilities.Core.Data;
 
     public class BaseCharacter<T, 
         LD, LP, LE,
-        ND, NP> : MonoBehaviour where T : ScriptableObject
+        ND, NP> : MonoBehaviour where T : CharacterStats
         where LD : LogicData, new()
         where LP : LogicParameter, new()
         where LE : LogicEvent, new()
@@ -52,6 +53,7 @@ namespace Utilities.Core
         {
             #region Update Data Event
             NavigationSystem.ReceiveInformation(WorldInterfaceSystem.Data);
+            NavigationSystem.ReceiveInformation(Stats);
             LogicSystem.ReceiveInformation(WorldInterfaceSystem.Data);
             LogicSystem.ReceiveInformation(NavigationSystem.Data);
             LogicSystem.ReceiveInformation(PhysicSystem.Data);

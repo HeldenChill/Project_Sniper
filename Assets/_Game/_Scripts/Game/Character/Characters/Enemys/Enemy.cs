@@ -11,7 +11,7 @@ namespace _Game.Character
     using Utilities.Core.Character.LogicSystem;
     using Utilities.Core.Character.NavigationSystem;
 
-    public class Enemy : BaseCharacter<CharacterStats, 
+    public class Enemy : BaseCharacter<EnemyStats, 
         LogicData, LogicParameter, EnemyLogicEvent,
         EnemyNavigationData, NavigationParameter>
     {

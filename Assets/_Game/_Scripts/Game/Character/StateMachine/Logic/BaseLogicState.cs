@@ -1,8 +1,9 @@
 namespace _Game.Character{
     using UnityEngine;
     using Utilities.Core.Character.LogicSystem;
+    using Utilities.Core.Data;
     using Utilities.StateMachine;
-    public abstract class BaseLogicState<T, D, P, E> : BaseState where T : ScriptableObject
+    public abstract class BaseLogicState<T, D, P, E> : BaseState where T : CharacterStats
         where D : LogicData
         where P : LogicParameter
         where E : LogicEvent
