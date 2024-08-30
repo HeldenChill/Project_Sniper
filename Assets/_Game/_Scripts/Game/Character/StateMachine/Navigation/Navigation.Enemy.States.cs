@@ -170,6 +170,7 @@ namespace _Game.Character
         {
             UpdateRandomPropertys();
             Data.MoveDirection = direction;
+            //DEV: Cannot Loop Here Because Trigger Before Stop
             timer.Start(changeTime, UpdatePatrol);
         }
     }

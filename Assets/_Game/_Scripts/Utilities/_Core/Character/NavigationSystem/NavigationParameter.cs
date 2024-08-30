@@ -9,9 +9,6 @@ namespace Utilities.Core.Character.NavigationSystem
 
     public class NavigationParameter : AbstractParameterSystem
     {
-        private ScriptableObject stats;
         public WorldInterfaceData WIData;
-
-        
     }
 }
