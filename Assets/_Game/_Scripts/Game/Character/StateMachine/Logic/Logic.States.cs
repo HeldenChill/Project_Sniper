@@ -28,7 +28,7 @@ namespace _Game.Character
         {
             if (Parameter.WIData.IsGrounded && Parameter.NavData.Jump.Value)
             {
-                ChangeState(State.JUMP);
+                ChangeState(STATE.JUMP);
                 return false;
             }
             return true;
@@ -39,7 +39,7 @@ namespace _Game.Character
         where P : LogicParameter
         where E : LogicEvent
     {
-        public override State Id => State.IDLE;
+        public override STATE Id => STATE.IDLE;
 
         public IdleState(D data, P parameter, E _event)
             : base(data, parameter, _event) { }
@@ -56,7 +56,7 @@ namespace _Game.Character
             }
             if (Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
             {
-                ChangeState(State.MOVE);
+                ChangeState(STATE.MOVE);
                 return true;
             }
             return true;
@@ -78,7 +78,7 @@ namespace _Game.Character
         {
         }
 
-        public override State Id => State.MOVE;
+        public override STATE Id => STATE.MOVE;
 
         public override void Enter()
         {
@@ -95,7 +95,7 @@ namespace _Game.Character
             if (!base.Update()) return false;
             if (Parameter.NavData.MoveDirection.sqrMagnitude < 0.0001f)
             {
-                ChangeState(State.IDLE);
+                ChangeState(STATE.IDLE);
             }
             return true;
         }
@@ -118,7 +118,7 @@ namespace _Game.Character
         {
         }
 
-        public override State Id => State.JUMP;
+        public override STATE Id => STATE.JUMP;
 
         public override void Enter()
         {
@@ -139,11 +139,11 @@ namespace _Game.Character
             {
                 if (Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
                 {
-                    ChangeState(State.MOVE);
+                    ChangeState(STATE.MOVE);
                 }
                 else
                 {
-                    ChangeState(State.IDLE);
+                    ChangeState(STATE.IDLE);
                 }
             }
             return true;
@@ -155,6 +155,31 @@ namespace _Game.Character
             return base.FixedUpdate();
         }
     }
+    public class DieState<D, P, E> : BaseLogicState<CharacterStats, D, P, E>
+        where D : LogicData
+        where P : LogicParameter
+        where E : LogicEvent
+    {
+        public DieState(D data, P parameter, E _event) : base(data, parameter, _event) { }
+
+        public override STATE Id => STATE.DIE;
+
+        public override void Enter()
+        {
+            Event.SetVelocityX(0);
+        }
+
+        public override void Exit()
+        {
+            
+        }
+
+        public override bool Update()
+        {
+            return true;
+        }
+    }
+
     #endregion
     #region PLAYER STATE
     public class PlayerIdleState : IdleState<LogicData, LogicParameter, LogicEvent>
@@ -180,35 +205,50 @@ namespace _Game.Character
     public class EnemyIdleState : IdleState<LogicData, LogicParameter, EnemyLogicEvent>
     {
         EnemyNavigationData NavData;
+        ALERT_STATE currentAlertState;
         public EnemyIdleState(LogicData data, LogicParameter parameter, EnemyLogicEvent _event) : base(data, parameter, _event)
         {
 
         }
 
-        public override State Id => State.IDLE;
+        public override STATE Id => STATE.IDLE;
 
         public override void Enter()
         {
             base.Enter();
-            NavData = (EnemyNavigationData)Parameter.NavData;
-            NavData._OnAlertStateChange += OnAlertStateChange;
+            currentAlertState = ALERT_STATE.NONE;
+            NavData = Parameter.NavData as EnemyNavigationData;
         }
 
         public override void Exit()
         {
             base.Exit();
-            NavData._OnAlertStateChange -= OnAlertStateChange;
+            Event.ChangeAlertState(ALERT_STATE.NONE);
         }
 
         public override bool Update()
         {
             if (!base.Update()) return false;
+            CheckingAlertState(NavData.AlertState);
             return true;
         }
 
-        protected void OnAlertStateChange(ALERT_STATE state)
+        protected void CheckingAlertState(ALERT_STATE state)
         {
-            Event.ChangeAlertState(state);
+            if (currentAlertState == state) return;
+            currentAlertState = state;
+            switch (state)
+            {
+                case ALERT_STATE.NONE:
+                    break;
+                case ALERT_STATE.START:
+                    break;
+                case ALERT_STATE.MED_ALERT:
+                    break;
+                case ALERT_STATE.ALERT:
+                    break;
+            }
+            Event.ChangeAlertState(currentAlertState);
         }
     }
     public class EnemyMoveState : MoveState<LogicData, LogicParameter, EnemyLogicEvent>

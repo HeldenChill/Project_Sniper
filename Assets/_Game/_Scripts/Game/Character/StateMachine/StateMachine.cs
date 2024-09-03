@@ -7,18 +7,18 @@ namespace Utilities.StateMachine
     public class StateMachine
     {
         private BaseState currentState;
-        private Dictionary<State, BaseState> states;
+        private Dictionary<STATE, BaseState> states;
         public bool IsDebug;
 
-        public State CurrentState => currentState.Id;
-        public Dictionary<State, BaseState> States => states;
+        public STATE CurrentState => currentState.Id;
+        public Dictionary<STATE, BaseState> States => states;
 
         public StateMachine()
         {
-            states = new Dictionary<State, BaseState>();
+            states = new Dictionary<STATE, BaseState>();
         }
 
-        public void Start(State id)
+        public void Start(STATE id)
         {
             currentState = states[id];
             currentState?.Enter();
@@ -33,7 +33,7 @@ namespace Utilities.StateMachine
             currentState?.Exit();
             currentState = null;
         }
-        public void AddState(State id, BaseState state)
+        public void AddState(STATE id, BaseState state)
         {
             if(!states.ContainsKey(id))
             {
@@ -41,7 +41,7 @@ namespace Utilities.StateMachine
                 states[id]._OnStateChanged += ChangeState;
             }
         }
-        public void RemoveState(State id) 
+        public void RemoveState(STATE id) 
         {
             if (states.ContainsKey(id))
             {
@@ -49,7 +49,7 @@ namespace Utilities.StateMachine
                 states.Remove(id);
             }
         }
-        public void ChangeState(State id)
+        public void ChangeState(STATE id)
         {
             DevLog.Log(DevId.Hung, $"CHANGE: {CurrentState} -> {id}");
             currentState?.Exit();

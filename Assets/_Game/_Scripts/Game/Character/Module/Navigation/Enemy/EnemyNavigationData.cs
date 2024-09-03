@@ -10,6 +10,6 @@ namespace _Game.Character
     using Base;
     public class EnemyNavigationData : NavigationData
     {
-        public Action<ALERT_STATE> _OnAlertStateChange;
+        public ALERT_STATE AlertState = ALERT_STATE.NONE;
     }
 }

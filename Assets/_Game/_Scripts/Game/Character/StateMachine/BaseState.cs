@@ -5,12 +5,14 @@ using UnityEngine;
 namespace Utilities.StateMachine
 {
 
-    public enum State
+    public enum STATE
     {
         NONE = 0,
         IDLE = 1,
         MOVE = 2,
         JUMP = 3,
+        DIE = 4,
+
 
 
         NAV_IDLE = 1000,
@@ -20,13 +22,13 @@ namespace Utilities.StateMachine
     }
     public abstract class BaseState
     {
-        public event Action<State> _OnStateChanged;
-        public abstract State Id { get; }
+        public event Action<STATE> _OnStateChanged;
+        public abstract STATE Id { get; }
         public abstract void Enter();
         public abstract bool Update();
         public virtual bool FixedUpdate() { return true; }
         public abstract void Exit();
-        protected void ChangeState(State newState)
+        protected void ChangeState(STATE newState)
         {
             _OnStateChanged?.Invoke(newState);
         }

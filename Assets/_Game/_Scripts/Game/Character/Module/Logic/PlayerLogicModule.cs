@@ -16,13 +16,13 @@ namespace _Game.Character
             base.Initialize(Data, Parameter, Event);
 
             stateMachine = new StateMachine();
-            stateMachine.AddState(State.IDLE ,new PlayerIdleState(Data, Parameter, Event));
-            stateMachine.AddState(State.MOVE, new  PlayerMoveState(Data, Parameter, Event));  
-            stateMachine.AddState(State.JUMP, new  PlayerJumpState(Data, Parameter, Event));
+            stateMachine.AddState(STATE.IDLE ,new PlayerIdleState(Data, Parameter, Event));
+            stateMachine.AddState(STATE.MOVE, new  PlayerMoveState(Data, Parameter, Event));  
+            stateMachine.AddState(STATE.JUMP, new  PlayerJumpState(Data, Parameter, Event));
         }
         private void Start()
         {
-            stateMachine.Start(State.IDLE);
+            stateMachine.Start(STATE.IDLE);
 
         }
         public override void UpdateData()

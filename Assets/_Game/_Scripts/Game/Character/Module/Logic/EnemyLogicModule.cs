@@ -18,15 +18,15 @@ namespace _Game.Character
             stateMachine = new StateMachine();
             stateMachine.IsDebug = true;
 
-            stateMachine.AddState(State.IDLE, new EnemyIdleState(Data, Parameter, Event));
-            stateMachine.AddState(State.MOVE, new EnemyMoveState(Data, Parameter, Event));
-            stateMachine.AddState(State.JUMP, new EnemyJumpState(Data, Parameter, Event));
+            stateMachine.AddState(STATE.IDLE, new EnemyIdleState(Data, Parameter, Event));
+            stateMachine.AddState(STATE.MOVE, new EnemyMoveState(Data, Parameter, Event));
+            stateMachine.AddState(STATE.JUMP, new EnemyJumpState(Data, Parameter, Event));
 
         }
 
         private void Start()
         {
-            stateMachine.Start(State.IDLE);
+            stateMachine.Start(STATE.IDLE);
         }
         public override void UpdateData()
         {

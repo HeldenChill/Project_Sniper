@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyStatus
   m_EditorClassIdentifier: 
   speed: 5
-  jumpSpeed: 10
+  jumpSpeed: 16
   hidden:
     maxTimePatrol: 6
     minTimePatrol: 2

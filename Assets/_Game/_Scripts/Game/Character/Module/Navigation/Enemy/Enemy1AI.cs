@@ -20,7 +20,7 @@ namespace _Game.Character
         }
         public override void StartNavigation()
         {
-            decision.Start(State.NAV_IDLE);
+            decision.Start(STATE.NAV_IDLE);
         }
 
         public override void StopNavigation()
@@ -35,10 +35,10 @@ namespace _Game.Character
 
         private void AddStates(StateMachine stateMachine)
         {
-            stateMachine.AddState(State.NAV_IDLE ,new NavIdleState(Data, Parameter));
-            stateMachine.AddState(State.NAV_ATTACK ,new NavAttackState(Data, Parameter));
-            stateMachine.AddState(State.NAV_PATROL ,new NavPatrolState(Data, Parameter));
-            stateMachine.AddState(State.NAV_ALERT ,new NavAlertState(Data, Parameter));
+            stateMachine.AddState(STATE.NAV_IDLE ,new NavIdleState(Data, Parameter));
+            stateMachine.AddState(STATE.NAV_ATTACK ,new NavAttackState(Data, Parameter));
+            stateMachine.AddState(STATE.NAV_PATROL ,new NavPatrolState(Data, Parameter));
+            stateMachine.AddState(STATE.NAV_ALERT ,new NavAlertState(Data, Parameter));
         }
     }
 }
