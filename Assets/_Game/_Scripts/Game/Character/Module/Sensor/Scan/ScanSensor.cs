@@ -14,9 +14,11 @@ namespace Dynamic.WorldInterface.Sensor
         [SerializeField] protected float viewAngle;
 
         #region Variable
-        private float currentAngle = 0;
+        protected float currentAngle = 0;
         [Range(0f, 100f)]
-        public float angleChangeVal = 2;
+        [SerializeField]
+        protected float angleChangeVal = 2;
+        protected float selfRotation = 0;
         #endregion
 
         public ScanSensorData SensorData
@@ -31,19 +33,9 @@ namespace Dynamic.WorldInterface.Sensor
         }
         public override void UpdateState()
         {
+            selfRotation = tf.eulerAngles.y;
             Observation();
         }
-
-        protected override void OnDrawGizmos()
-        {
-            if (Data != null && eyePosition != null)
-            {
-                Gizmos.color = Color.blue;
-                Gizmos.DrawLine(eyePosition.position, eyePosition.position + (Vector3)(MathHelper.AngleToVector(currentAngle, Data.CharacterParameterData.IsFaceRight) * viewRange));
-            }
-
-        }
-
         public virtual void Observation()
         {
             if (currentAngle >= viewAngle || currentAngle <= -viewAngle)
@@ -52,7 +44,7 @@ namespace Dynamic.WorldInterface.Sensor
             }
 
             RaycastHit2D hit;
-            hit = Physics2D.Raycast(eyePosition.position, MathHelper.AngleToVector(currentAngle, Data.CharacterParameterData.IsFaceRight), viewRange);
+            hit = Physics2D.Raycast(eyePosition.position, MathHelper.AngleToVector(currentAngle + selfRotation, Data.CharacterParameterData.IsFaceRight), viewRange);
             currentAngle += angleChangeVal * Time.deltaTime;
 
 
@@ -76,6 +68,15 @@ namespace Dynamic.WorldInterface.Sensor
                     SensorData.AttackObject = default;
                 }
             }
+        }
+        protected override void OnDrawGizmos()
+        {
+            if (Data != null && eyePosition != null)
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(eyePosition.position, eyePosition.position + (Vector3)(MathHelper.AngleToVector(currentAngle + selfRotation, Data.CharacterParameterData.IsFaceRight) * viewRange));
+            }
+
         }
     }
 }

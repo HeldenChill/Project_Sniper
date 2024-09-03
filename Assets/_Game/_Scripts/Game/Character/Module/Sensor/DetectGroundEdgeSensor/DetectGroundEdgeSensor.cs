@@ -15,9 +15,6 @@ namespace Dynamic.WorldInterface.Sensor
         protected Transform leftCheckPointPos;
         [SerializeField]
         protected Transform rightCheckPointPos;
-
-        [SerializeField] protected bool rightEdgeDetected;
-        [SerializeField] protected bool leftEdgeDetected;
         public DetectGroundEdgeData SensorData
         {
             get;
@@ -32,10 +29,16 @@ namespace Dynamic.WorldInterface.Sensor
 
         public override void UpdateState()
         {
-            SensorData.RightEdgeDetected = Physics2D.Raycast(rightCheckPointPos.position, rightCheckPointPos.right, checkLength, layer);
-            SensorData.LeftEdgeDetected = Physics2D.Raycast(leftCheckPointPos.position, leftCheckPointPos.right, checkLength, layer);
-            rightEdgeDetected = SensorData.RightEdgeDetected;
-            leftEdgeDetected = SensorData.LeftEdgeDetected;
+            if(rightCheckPointPos.right.x > 0)
+            {
+                SensorData.RightEdgeDetected = Physics2D.Raycast(rightCheckPointPos.position, rightCheckPointPos.right, checkLength, layer);
+                SensorData.LeftEdgeDetected = Physics2D.Raycast(leftCheckPointPos.position, leftCheckPointPos.right, checkLength, layer);
+            }
+            else
+            {
+                SensorData.RightEdgeDetected = Physics2D.Raycast(leftCheckPointPos.position, leftCheckPointPos.right, checkLength, layer);
+                SensorData.LeftEdgeDetected = Physics2D.Raycast(rightCheckPointPos.position, rightCheckPointPos.right, checkLength, layer);
+            }
         }
 
         protected override void OnDrawGizmos()

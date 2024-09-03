@@ -21,6 +21,8 @@ namespace Utilities.Core.Character.WorldInterfaceSystem
         protected WorldInterfaceParameter Parameter;
         [SerializeField]
         protected LayerMask layer;
+        [SerializeField]
+        protected Transform tf;
         public virtual void Initialize(WorldInterfaceData Data, WorldInterfaceParameter Parameter)
         {
             this.Parameter = Parameter;

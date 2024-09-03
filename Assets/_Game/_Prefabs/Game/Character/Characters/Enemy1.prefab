@@ -49,6 +49,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
+  tf: {fileID: 7014530832164071963}
   groundCheckRadius: 0.1
   wallCheckRadius: 0.5
   groundCheck: {fileID: 2978088238396950713}
@@ -278,10 +279,11 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 128
+  tf: {fileID: 8611128500037253403}
   eyePosition: {fileID: 937609404599132363}
   viewRange: 10
   viewAngle: 90
-  angleChangeVal: 60
+  angleChangeVal: 15
 --- !u!1 &5594344343600486333
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,6 +395,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
+  tf: {fileID: 165066744012971593}
   checkLength: 0.6
   leftCheckPointPos: {fileID: 6520012370139013771}
   rightCheckPointPos: {fileID: 3036447624052542987}

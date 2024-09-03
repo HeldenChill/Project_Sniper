@@ -80,6 +80,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 64
+  tf: {fileID: 9209557543700348698}
   groundCheckRadius: 0.1
   wallCheckRadius: 0.5
   groundCheck: {fileID: 2210316362900359499}
