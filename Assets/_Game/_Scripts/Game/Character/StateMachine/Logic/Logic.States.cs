@@ -73,6 +73,8 @@ namespace _Game.Character
         where P : LogicParameter
         where E : LogicEvent
     {
+        protected readonly Quaternion LEFT_QUATERNION = Quaternion.Euler(0, 180, 0);
+        protected readonly Quaternion RIGHT_QUATERNION = default;
         public MoveState(D data, P parameter, E _event)
             : base(data, parameter, _event)
         {
@@ -96,6 +98,17 @@ namespace _Game.Character
             if (Parameter.NavData.MoveDirection.sqrMagnitude < 0.0001f)
             {
                 ChangeState(STATE.IDLE);
+            }
+            else
+            {
+                if(Parameter.NavData.MoveDirection.x > 0)
+                {
+                    Event.SetSkinRotation(RIGHT_QUATERNION);
+                }
+                else
+                {
+                    Event.SetSkinRotation(LEFT_QUATERNION);
+                }
             }
             return true;
         }

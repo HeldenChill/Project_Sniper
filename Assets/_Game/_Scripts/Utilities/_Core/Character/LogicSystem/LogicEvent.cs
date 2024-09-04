@@ -59,7 +59,7 @@ namespace Utilities.Core.Character.LogicSystem
         /// <summary>
         /// Set <c>Rotation</c> of character.
         /// </summary>
-        public event Action _SetDynamicRotation;
+        public event Action<Quaternion> _SetSkinRotation;
 
         public void SetVelocityX(float speed)
         {
@@ -181,9 +181,9 @@ namespace Utilities.Core.Character.LogicSystem
         {
             _IgnoreCollision?.Invoke(value, time);
         }
-        public void SetDynamicRotation()
+        public void SetSkinRotation(Quaternion rotation)
         {
-            _SetDynamicRotation?.Invoke();
+            _SetSkinRotation?.Invoke(rotation);
         }
         private void WarningInformation(Delegate action, string name)
         {

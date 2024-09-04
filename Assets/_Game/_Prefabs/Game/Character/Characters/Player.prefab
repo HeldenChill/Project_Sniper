@@ -261,6 +261,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5600719301390378321, guid: 7d8b50da0590b654aabe0c469d6734ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 832596083715213516}
+    - targetCorrespondingSourceObject: {fileID: 5600719301390378321, guid: 7d8b50da0590b654aabe0c469d6734ad, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5360080018579477838}
     - targetCorrespondingSourceObject: {fileID: 284631280836115434, guid: 7d8b50da0590b654aabe0c469d6734ad, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2148892525894211752}
@@ -274,6 +277,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 3623865738152697113}
   m_SourcePrefab: {fileID: 100100000, guid: 7d8b50da0590b654aabe0c469d6734ad, type: 3}
+--- !u!4 &350534532867936964 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8804690097311199185, guid: 7d8b50da0590b654aabe0c469d6734ad, type: 3}
+  m_PrefabInstance: {fileID: 9146199181574798613}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &791787670598242874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8363515472119934767, guid: 7d8b50da0590b654aabe0c469d6734ad, type: 3}
@@ -307,6 +315,7 @@ MonoBehaviour:
   LogicModule: {fileID: 3623865738152697113}
   PhysicModule: {fileID: 832596083715213516}
   weapon: {fileID: 1013972686395923116}
+  displayModule: {fileID: 5360080018579477838}
 --- !u!114 &832596083715213516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -322,6 +331,20 @@ MonoBehaviour:
   rb: {fileID: 7557791436568857822}
   objectLayerName: 
   ignoreLayerName: 
+--- !u!114 &5360080018579477838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3698602315297052740}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420ea7d23371b994894a46eacd1fbbc0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skinTf: {fileID: 350534532867936964}
+  sensorTf: {fileID: 2773135758927419011}
 --- !u!1 &6469111304961727478 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2822408722138982115, guid: 7d8b50da0590b654aabe0c469d6734ad, type: 3}

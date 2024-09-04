@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace _Game.Character
 {
-    public class DisplayModule : MonoBehaviour
+    public class EnemyDisplayModule : BaseDisplayModule
     {
         [SerializeField]
         SpriteRenderer alertSpriteRenderer;

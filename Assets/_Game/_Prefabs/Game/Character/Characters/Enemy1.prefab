@@ -399,8 +399,6 @@ MonoBehaviour:
   checkLength: 0.6
   leftCheckPointPos: {fileID: 6520012370139013771}
   rightCheckPointPos: {fileID: 3036447624052542987}
-  rightEdgeDetected: 0
-  leftEdgeDetected: 0
 --- !u!1001 &64693840392942806
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -639,6 +637,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 239f1834a3209f34bac4b5d8b4ddbdd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  skinTf: {fileID: 3821156550144960690}
+  sensorTf: {fileID: 1704059027917942005}
   alertSpriteRenderer: {fileID: 8711985195463804521}
   alertObject: {fileID: 4908211962479340192}
 --- !u!4 &1704059027917942005 stripped
