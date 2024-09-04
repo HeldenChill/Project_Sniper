@@ -10,13 +10,16 @@ namespace _Game
     {
         protected WorldInterfaceData data;
         protected WorldInterfaceModule module;
+        protected object source;
+        [SerializeField]
+        protected float damage;
 
         public abstract void Fire();
-        public virtual void Equip(WorldInterfaceModule module, WorldInterfaceData data)
+        public virtual void Equip(WorldInterfaceModule module, WorldInterfaceData data, object source)
         {
             this.data = data;
             this.module = module;
-            
+            this.source = source;
         }
 
         public virtual void Unequip()

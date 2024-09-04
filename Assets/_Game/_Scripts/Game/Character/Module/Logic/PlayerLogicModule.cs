@@ -16,9 +16,11 @@ namespace _Game.Character
             base.Initialize(Data, Parameter, Event);
 
             stateMachine = new StateMachine();
+            stateMachine.IsDebug = false;
             stateMachine.AddState(STATE.IDLE ,new PlayerIdleState(Data, Parameter, Event));
             stateMachine.AddState(STATE.MOVE, new  PlayerMoveState(Data, Parameter, Event));  
             stateMachine.AddState(STATE.JUMP, new  PlayerJumpState(Data, Parameter, Event));
+            stateMachine.AddState(STATE.IN_AIR, new PlayerAirState(Data, Parameter, Event));
         }
         private void Start()
         {

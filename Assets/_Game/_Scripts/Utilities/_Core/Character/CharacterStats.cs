@@ -4,15 +4,25 @@ using UnityEngine;
 
 namespace Utilities.Core.Data
 {
+    using SStats;
     [CreateAssetMenu(fileName = "PlayerStatus", menuName = "Status Data/Character")]
     public class CharacterStats : ScriptableObject
     {
         [SerializeField]
-        float speed;
+        Stat speed;
         [SerializeField]
-        float jumpSpeed;
+        Stat jumpSpeed;
+        [SerializeField]
+        Stat hp;
 
-        public float Speed => speed;
-        public float JumpSpeed => jumpSpeed;
+        private void OnEnable()
+        {
+            speed.isDirty = true;
+            jumpSpeed.isDirty = true;
+            hp.isDirty = true;
+        }
+        public Stat Speed => speed;
+        public Stat JumpSpeed => jumpSpeed;
+        public Stat Hp => hp;
     }
 }

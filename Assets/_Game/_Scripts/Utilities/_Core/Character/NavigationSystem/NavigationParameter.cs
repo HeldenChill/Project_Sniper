@@ -5,7 +5,6 @@ using UnityEngine;
 namespace Utilities.Core.Character.NavigationSystem
 {
     using Utilities.Core.Character.WorldInterfaceSystem;
-    using Utilities.Core.Character.LogicSystem;
 
     public class NavigationParameter : AbstractParameterSystem
     {

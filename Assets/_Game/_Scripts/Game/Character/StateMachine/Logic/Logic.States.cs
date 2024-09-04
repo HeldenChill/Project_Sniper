@@ -7,14 +7,14 @@ namespace _Game.Character
 {
     using Base;
     using System;
-    using Utilities.Core.Data;
 
     using Utilities.Core.Character.LogicSystem;
+    using Utilities.Core.Data;
     using Utilities.StateMachine;
     #region BASE STATE
 
     #region GROUNDED STATE
-    public abstract class GroundedState<D, P, E> : BaseLogicState<CharacterStats, D, P, E>
+    public abstract class GroundedState<D, P, E> : BaseLogicState<D, P, E>
         where D : LogicData
         where P : LogicParameter
         where E : LogicEvent
@@ -26,6 +26,7 @@ namespace _Game.Character
 
         public override bool Update()
         {
+            if(!base.Update()) return false;
             if (Parameter.WIData.IsGrounded && Parameter.NavData.Jump.Value)
             {
                 ChangeState(STATE.JUMP);
@@ -73,8 +74,6 @@ namespace _Game.Character
         where P : LogicParameter
         where E : LogicEvent
     {
-        protected readonly Quaternion LEFT_QUATERNION = Quaternion.Euler(0, 180, 0);
-        protected readonly Quaternion RIGHT_QUATERNION = default;
         public MoveState(D data, P parameter, E _event)
             : base(data, parameter, _event)
         {
@@ -84,7 +83,7 @@ namespace _Game.Character
 
         public override void Enter()
         {
-            Event.SetVelocityX(Math.Sign(Parameter.NavData.MoveDirection.x) * Stats.Speed);
+            Event.SetVelocityX(Math.Sign(Parameter.NavData.MoveDirection.x) * Stats<CharacterStats>().Speed.Value);
         }
 
         public override void Exit()
@@ -101,26 +100,19 @@ namespace _Game.Character
             }
             else
             {
-                if(Parameter.NavData.MoveDirection.x > 0)
-                {
-                    Event.SetSkinRotation(RIGHT_QUATERNION);
-                }
-                else
-                {
-                    Event.SetSkinRotation(LEFT_QUATERNION);
-                }
+                UpdateRotation();
             }
             return true;
         }
 
         public override bool FixedUpdate()
         {
-            Event.SetVelocityX(Math.Sign(Parameter.NavData.MoveDirection.x) * Stats.Speed);
+            Event.SetVelocityX(Math.Sign(Parameter.NavData.MoveDirection.x) * Stats<CharacterStats>().Speed.Value);
             return base.FixedUpdate();
         }
     }
     #endregion
-    public abstract class JumpState<D, P, E> : BaseLogicState<CharacterStats, D, P, E>
+    public abstract class JumpState<D, P, E> : BaseLogicState<D, P, E>
         where D : LogicData
         where P : LogicParameter
         where E : LogicEvent
@@ -135,7 +127,7 @@ namespace _Game.Character
 
         public override void Enter()
         {
-            Event.SetVelocityY(Stats.JumpSpeed);
+            Event.SetVelocityY(Stats<CharacterStats>().JumpSpeed.Value);
             isJumping = false;
         }
 
@@ -146,29 +138,14 @@ namespace _Game.Character
 
         public override bool Update()
         {
+            if (!base.Update()) return false;
             isJumping = !Parameter.WIData.IsGrounded || isJumping;
             if (!isJumping) return false;
-            if (Parameter.WIData.IsGrounded)
-            {
-                if (Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
-                {
-                    ChangeState(STATE.MOVE);
-                }
-                else
-                {
-                    ChangeState(STATE.IDLE);
-                }
-            }
+            ChangeState(STATE.IN_AIR);
             return true;
-        }
-
-        public override bool FixedUpdate()
-        {
-            Event.SetVelocityX(Math.Sign(Parameter.NavData.MoveDirection.x) * Stats.Speed);
-            return base.FixedUpdate();
-        }
+        }       
     }
-    public class DieState<D, P, E> : BaseLogicState<CharacterStats, D, P, E>
+    public class DieState<D, P, E> : BaseLogicState<D, P, E>
         where D : LogicData
         where P : LogicParameter
         where E : LogicEvent
@@ -193,6 +170,50 @@ namespace _Game.Character
         }
     }
 
+    public abstract class AirState<D, P, E> : BaseLogicState<D, P, E>
+        where D : LogicData
+        where P : LogicParameter
+        where E : LogicEvent
+    {
+        public AirState(D data, P parameter, E _event) : base(data, parameter, _event) { }
+
+        public override STATE Id => STATE.IN_AIR;
+
+        public override void Enter()
+        {
+            
+        }
+
+        public override void Exit()
+        {
+
+        }
+
+        public override bool Update()
+        {         
+            if(!base.Update()) return false;
+            UpdateRotation();
+            if (Parameter.WIData.IsGrounded)
+            {
+                if (Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
+                {
+                    ChangeState(STATE.MOVE);
+                }
+                else
+                {
+                    ChangeState(STATE.IDLE);
+                }
+            }
+            return true;
+        }
+
+        public override bool FixedUpdate()
+        {
+            Event.SetVelocityX(Math.Sign(Parameter.NavData.MoveDirection.x) * Stats<CharacterStats>().Speed.Value);
+            return base.FixedUpdate();
+        }
+    }
+
     #endregion
     #region PLAYER STATE
     public class PlayerIdleState : IdleState<LogicData, LogicParameter, LogicEvent>
@@ -212,6 +233,16 @@ namespace _Game.Character
         public PlayerJumpState(LogicData data, LogicParameter parameter, LogicEvent _event) : base(data, parameter, _event)
         {
         }
+    }
+
+    public class PlayerAirState : AirState<LogicData, LogicParameter, LogicEvent>
+    {
+        public PlayerAirState(LogicData data, LogicParameter parameter, LogicEvent _event) : base(data, parameter, _event) { }
+    }
+
+    public class PlayerDieState : DieState<LogicData, LogicParameter, LogicEvent>
+    {
+        public PlayerDieState(LogicData data, LogicParameter parameter, LogicEvent _event) : base(data, parameter, _event) { }
     }
     #endregion
     #region ENEMY STATE
@@ -273,6 +304,12 @@ namespace _Game.Character
     public class EnemyJumpState : JumpState<LogicData, LogicParameter, EnemyLogicEvent>
     {
         public EnemyJumpState(LogicData data, LogicParameter parameter, EnemyLogicEvent _event) : base(data, parameter, _event)
+        {
+        }
+    }
+    public class EnemyDieState : DieState<LogicData, LogicParameter, EnemyLogicEvent>
+    {
+        public EnemyDieState(LogicData data, LogicParameter parameter, EnemyLogicEvent _event) : base(data, parameter, _event)
         {
         }
     }

@@ -19,11 +19,14 @@ namespace _Game.Character
         EnemyDisplayModule displayModule;
         [SerializeField]
         EnemyWeapon weapon;
+        [SerializeField]
+        TakeDamageModule takeDamageModule;
         public EnemyWeapon Weapon => weapon;
         protected override void Awake()
         {
             base.Awake();
-            weapon.Equip(WorldInterfaceModule, WorldInterfaceSystem.Data);
+            weapon.Equip(WorldInterfaceModule, WorldInterfaceSystem.Data, this);
+            takeDamageModule.OnInit(typeof(Enemy));
         }
         protected override void OnEnable()
         {
@@ -69,6 +72,6 @@ namespace _Game.Character
             LogicSystem.Event._OnFire -= Weapon.Fire;
 
             #endregion
-        }
+        }        
     }
 }

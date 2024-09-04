@@ -9,9 +9,10 @@ namespace _Game.Character
     using Base;
     using Dynamic.WorldInterface.Data;
     using Utilities.Core.Character.NavigationSystem;
+    using Utilities.Core.Data;
     using Utilities.StateMachine;
     using Utilities.Timer;
-    public class NavAlertState : BaseNavigationState<EnemyStats, EnemyNavigationData, NavigationParameter>
+    public class NavAlertState : BaseNavigationState<EnemyNavigationData, NavigationParameter>
     {
         protected ScanSensorData scanSensorData;
         bool isSeeingObject;
@@ -59,7 +60,7 @@ namespace _Game.Character
         }      
     }
 
-    public class NavAttackState : BaseNavigationState<EnemyStats, EnemyNavigationData, NavigationParameter>
+    public class NavAttackState : BaseNavigationState<EnemyNavigationData, NavigationParameter>
     {
         public NavAttackState(EnemyNavigationData data, NavigationParameter parameter) : base(data, parameter)
         {
@@ -83,7 +84,7 @@ namespace _Game.Character
         }
     }
 
-    public class NavPatrolState : BaseNavigationState<EnemyStats, EnemyNavigationData, NavigationParameter>
+    public class NavPatrolState : BaseNavigationState<EnemyNavigationData, NavigationParameter>
     {
         STimer timer;
         ScanSensorData scanSensorData;
@@ -152,7 +153,7 @@ namespace _Game.Character
                 CAN_MOVE_DIRS.Add(Vector2.right);
             }
 
-            changeTime = Random.Range(Stats.Hidden.MinTimePatrol, Stats.Hidden.MaxTimePatrol);
+            changeTime = Random.Range(Stats<EnemyStats>().Hidden.MinTimePatrol, Stats<EnemyStats>().Hidden.MaxTimePatrol);
             direction = CAN_MOVE_DIRS[Random.Range(0, CAN_MOVE_DIRS.Count)];
         }
         protected void UpdatePatrol()
@@ -165,7 +166,7 @@ namespace _Game.Character
     }
 
 
-    public class NavIdleState : BaseNavigationState<EnemyStats, EnemyNavigationData, NavigationParameter>
+    public class NavIdleState : BaseNavigationState<EnemyNavigationData, NavigationParameter>
     {
         STimer waitTimer;
         ScanSensorData scanSensorData;
@@ -179,7 +180,7 @@ namespace _Game.Character
         public override void Enter()
         {
             scanSensorData = Parameter.WIData.GetSensorData<ScanSensorData>();
-            float waitTime = Random.Range(Stats.Hidden.MinTimeIdle, Stats.Hidden.MaxTimeIdle);
+            float waitTime = Random.Range(Stats<EnemyStats>().Hidden.MinTimeIdle, Stats<EnemyStats>().Hidden.MaxTimeIdle);
             waitTimer.Start(waitTime, () => ChangeState(STATE.NAV_PATROL));
         }
 

@@ -12,6 +12,7 @@ namespace Utilities.StateMachine
         MOVE = 2,
         JUMP = 3,
         DIE = 4,
+        IN_AIR = 5,
 
 
 

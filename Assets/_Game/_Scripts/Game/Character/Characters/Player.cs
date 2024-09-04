@@ -18,11 +18,14 @@ namespace _Game.Character
         PlayerWeapon weapon;
         [SerializeField]
         BaseDisplayModule displayModule;
+        [SerializeField]
+        TakeDamageModule takeDamageModule;
         public PlayerWeapon Weapon => weapon;
         protected override void Awake()
         {
             base.Awake();
-            weapon.Equip(WorldInterfaceModule, WorldInterfaceSystem.Data);
+            weapon.Equip(WorldInterfaceModule, WorldInterfaceSystem.Data, this);
+            takeDamageModule.OnInit(typeof(Player));
         }
         protected override void OnEnable()
         {

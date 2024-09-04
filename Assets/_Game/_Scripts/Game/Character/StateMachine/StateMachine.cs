@@ -51,7 +51,10 @@ namespace Utilities.StateMachine
         }
         public void ChangeState(STATE id)
         {
-            DevLog.Log(DevId.Hung, $"CHANGE: {CurrentState} -> {id}");
+            if (IsDebug)
+            {
+                DevLog.Log(DevId.Hung, $"CHANGE: {CurrentState} -> {id}");
+            }
             currentState?.Exit();
             currentState = states[id];
             currentState?.Enter();

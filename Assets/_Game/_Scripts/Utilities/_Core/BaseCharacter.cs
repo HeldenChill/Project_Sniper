@@ -11,7 +11,7 @@ namespace Utilities.Core
     using Utilities.Core.Character.PhysicSystem;
     using Utilities.Core.Data;
 
-    public class BaseCharacter<T, 
+    public abstract class BaseCharacter<T, 
         LD, LP, LE,
         ND, NP> : MonoBehaviour where T : CharacterStats
         where LD : LogicData, new()

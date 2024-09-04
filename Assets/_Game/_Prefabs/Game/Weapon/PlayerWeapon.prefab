@@ -361,6 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1ff9914db4bef649852c7747677a32c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
   sensor: {fileID: 2289683779409833473}
   aimEdge1: {fileID: 3663222827543891789}
   aimEdge2: {fileID: 6310028256410930719}

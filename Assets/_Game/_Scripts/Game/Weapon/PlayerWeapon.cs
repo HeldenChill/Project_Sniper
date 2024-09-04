@@ -5,6 +5,7 @@ namespace _Game
 {
     using DesignPattern;
     using Dynamic.WorldInterface.Data;
+    using SStats;
     using Utilities.Core.Character.WorldInterfaceSystem;
     public class PlayerWeapon : BaseWeapon
     {
@@ -13,8 +14,8 @@ namespace _Game
         [SerializeField]
         protected GameObject aimEdge1;
         [SerializeField]
-        protected GameObject aimEdge2;
-        
+        protected GameObject aimEdge2;       
+       
         protected Edge2SenorData fanScanSensorData;
         public override void Fire()
         {
@@ -23,12 +24,13 @@ namespace _Game
             BaseBullet bullet = SimplePool.Spawn<BaseBullet>(PoolType.TYPE1_BULLET);
             bullet.Tf.position = transform.position;
             bullet.Tf.rotation = Quaternion.Euler(0, 0, fireAngle);
-            bullet.Shot();
+            bullet.Damage = damage;
+            bullet.Shot(source);
         }
 
-        public override void Equip(WorldInterfaceModule module, WorldInterfaceData data)
+        public override void Equip(WorldInterfaceModule module, WorldInterfaceData data, object source)
         {
-            base.Equip(module, data);
+            base.Equip(module, data, source);
             this.module.AddSensor(sensor);
             fanScanSensorData = data.GetSensorData<Edge2SenorData>();
         }

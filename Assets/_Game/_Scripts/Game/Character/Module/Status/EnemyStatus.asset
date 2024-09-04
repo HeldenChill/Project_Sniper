@@ -12,8 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49dac0073ca2b5742a8cadad731a467b, type: 3}
   m_Name: EnemyStatus
   m_EditorClassIdentifier: 
-  speed: 5
-  jumpSpeed: 16
+  speed:
+    BaseValue: 5
+    _value: 5
+  jumpSpeed:
+    BaseValue: 16
+    _value: 0
+  hp:
+    BaseValue: 1
+    _value: 0
   hidden:
     maxTimePatrol: 6
     minTimePatrol: 2
