@@ -53,7 +53,7 @@ namespace _Game.Character
             if (!base.Update()) return false;
             if (Parameter.NavData.Fire.Value)
             {
-                Event.Fire();
+                Event.OnFire();
             }
             if (Parameter.NavData.MoveDirection.sqrMagnitude > 0.0001f)
             {
@@ -157,6 +157,7 @@ namespace _Game.Character
         public override void Enter()
         {
             Event.SetVelocityX(0);
+            Event.OnDie();
         }
 
         public override void Exit()
@@ -169,7 +170,6 @@ namespace _Game.Character
             return true;
         }
     }
-
     public abstract class AirState<D, P, E> : BaseLogicState<D, P, E>
         where D : LogicData
         where P : LogicParameter
@@ -213,7 +213,6 @@ namespace _Game.Character
             return base.FixedUpdate();
         }
     }
-
     #endregion
     #region PLAYER STATE
     public class PlayerIdleState : IdleState<LogicData, LogicParameter, LogicEvent>

@@ -51,6 +51,7 @@ namespace Utilities.StateMachine
         }
         public void ChangeState(STATE id)
         {
+            if (!states.ContainsKey(id)) return;
             if (IsDebug)
             {
                 DevLog.Log(DevId.Hung, $"CHANGE: {CurrentState} -> {id}");

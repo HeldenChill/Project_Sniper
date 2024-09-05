@@ -60,6 +60,7 @@ namespace Utilities.Core.Character.LogicSystem
         /// Set <c>Rotation</c> of character.
         /// </summary>
         public event Action<Quaternion> _SetSkinRotation;
+        public event Action _OnDie;
 
         public void SetVelocityX(float speed)
         {
@@ -151,7 +152,11 @@ namespace Utilities.Core.Character.LogicSystem
             _AddTransformPosition?.Invoke(pos);
         }
 
-        public void Fire()
+        public void OnDie()
+        {
+            _OnDie?.Invoke();
+        }
+        public void OnFire()
         {
             _OnFire?.Invoke();
         }

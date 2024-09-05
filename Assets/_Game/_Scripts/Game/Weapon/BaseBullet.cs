@@ -30,6 +30,7 @@ namespace _Game
                 if(enemy.Type == typeof(Enemy))
                 {
                     enemy?.TakeDamage(-Damage, source);
+                    this.Despawn();
                 }
             }
         }

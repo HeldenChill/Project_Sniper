@@ -59,7 +59,6 @@ namespace _Game.Character
             return true;
         }      
     }
-
     public class NavAttackState : BaseNavigationState<EnemyNavigationData, NavigationParameter>
     {
         public NavAttackState(EnemyNavigationData data, NavigationParameter parameter) : base(data, parameter)
@@ -83,7 +82,6 @@ namespace _Game.Character
             return true;
         }
     }
-
     public class NavPatrolState : BaseNavigationState<EnemyNavigationData, NavigationParameter>
     {
         STimer timer;
@@ -164,8 +162,6 @@ namespace _Game.Character
             timer.Start(changeTime, UpdatePatrol);
         }
     }
-
-
     public class NavIdleState : BaseNavigationState<EnemyNavigationData, NavigationParameter>
     {
         STimer waitTimer;
@@ -202,6 +198,5 @@ namespace _Game.Character
             return true;
         }
     }
-
 }
 

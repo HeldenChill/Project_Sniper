@@ -47,6 +47,7 @@ namespace _Game.Character
             LogicSystem.Event._OnFire += Weapon.Fire;
 
             LogicSystem.Event._SetSkinRotation += displayModule.SetSkinRotation;
+            LogicSystem.Event._OnDie += OnDie;
             NavigationSystem.Module.StartNavigation();
             #endregion
         }
@@ -69,9 +70,15 @@ namespace _Game.Character
             LogicSystem.Event._OnAlertStateChange -= displayModule.OnChangeAlertState;
 
             LogicSystem.Event._SetSkinRotation -= displayModule.SetSkinRotation;
+            LogicSystem.Event._OnDie -= OnDie;
             LogicSystem.Event._OnFire -= Weapon.Fire;
 
             #endregion
-        }        
+        }  
+        
+        protected void OnDie()
+        {
+            Destroy(gameObject);
+        }
     }
 }
