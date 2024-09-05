@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 namespace _Game.Character
 {
+    using DesignPattern;
     using UnityEngine;
     using Utilities.Core;
     using Utilities.Core.Character.LogicSystem;
@@ -67,6 +68,10 @@ namespace _Game.Character
             LogicSystem.Event._SetSkinRotation -= displayModule.SetSkinRotation;
             LogicSystem.Event._OnFire -= Weapon.Fire;
             #endregion
+        }
+        public void Teleport(Vector2 position)
+        {
+            Tf.position = position;
         }
     }
 }

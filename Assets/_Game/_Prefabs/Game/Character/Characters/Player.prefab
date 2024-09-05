@@ -313,6 +313,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c745c37232cd43147906a431783ffec3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tf: {fileID: 791787670598242874}
+  poolType: 0
   Stats: {fileID: 11400000, guid: 06e5b1dd95bf31d4eb9504514b0005b5, type: 2}
   WorldInterfaceModule: {fileID: 4750699293615450764}
   NavigationModule: {fileID: 7121994988495848043}

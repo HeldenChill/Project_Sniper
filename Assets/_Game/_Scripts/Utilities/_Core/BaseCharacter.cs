@@ -10,10 +10,15 @@ namespace Utilities.Core
     using Utilities.Core.Character.LogicSystem;
     using Utilities.Core.Character.PhysicSystem;
     using Utilities.Core.Data;
+    using DesignPattern;
 
+    public interface ICharacter
+    {
+
+    }
     public abstract class BaseCharacter<T, 
         LD, LP, LE,
-        ND, NP> : MonoBehaviour where T : CharacterStats
+        ND, NP> : GameUnit, ICharacter where T : CharacterStats
         where LD : LogicData, new()
         where LP : LogicParameter, new()
         where LE : LogicEvent, new()

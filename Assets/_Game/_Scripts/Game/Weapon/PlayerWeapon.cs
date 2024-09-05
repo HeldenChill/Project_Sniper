@@ -6,6 +6,7 @@ namespace _Game
     using DesignPattern;
     using Dynamic.WorldInterface.Data;
     using SStats;
+    using Utilities.Core;
     using Utilities.Core.Character.WorldInterfaceSystem;
     public class PlayerWeapon : BaseWeapon
     {
@@ -28,7 +29,7 @@ namespace _Game
             bullet.Shot(source);
         }
 
-        public override void Equip(WorldInterfaceModule module, WorldInterfaceData data, object source)
+        public override void Equip(WorldInterfaceModule module, WorldInterfaceData data, ICharacter source)
         {
             base.Equip(module, data, source);
             this.module.AddSensor(sensor);

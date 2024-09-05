@@ -20,9 +20,10 @@ namespace _Game.Character
         {
             this.type = type;
         }
-        public void TakeDamage(float damage, object source)
+        public float TakeDamage(float damage, object source)
         {
             Stats.Hp.AddModifier(new SStats.StatModifier(damage, SStats.StatModType.Flat, 0, source));
+            return Stats.Hp.Value;
         }
     }
 }

@@ -15,7 +15,7 @@ namespace Dynamic.WorldInterface.Sensor
 
         #region Variable
         protected float currentAngle = 0;
-        [Range(0f, 100f)]
+        [Range(0f, 1000f)]
         [SerializeField]
         protected float angleChangeVal = 2;
         protected float selfRotation = 0;

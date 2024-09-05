@@ -8,7 +8,7 @@ namespace _Game
 {
     public interface IDamageable
     {
-        void TakeDamage(float damage, object source);
+        float TakeDamage(float damage, object source);
         CharacterStats Stats { get; }
         Type Type { get; }
     }

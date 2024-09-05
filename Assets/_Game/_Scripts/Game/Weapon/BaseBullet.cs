@@ -6,16 +6,20 @@ namespace _Game
 {
     using _Game.Character;
     using DesignPattern;
+    using Utilities.Core;
+
     public class BaseBullet : GameUnit
     {
         [SerializeField]
         Rigidbody2D rb;
         [SerializeField]
         float speed;
-        object source;
+        [SerializeField]
+
+        ICharacter source;
 
         public float Damage;
-        public void Shot(object source = null)
+        public void Shot(ICharacter source = null)
         {
             this.source = source;
             rb.velocity = Tf.right * speed;
@@ -29,8 +33,13 @@ namespace _Game
                 IDamageable enemy = collision.gameObject.GetComponent<IDamageable>();
                 if(enemy.Type == typeof(Enemy))
                 {
-                    enemy?.TakeDamage(-Damage, source);
+                    float value = enemy.TakeDamage(-Damage, source);
                     this.Despawn();
+
+                    if(value <= 0 && source is Player)
+                    {
+                        ((Player)source).Teleport(Tf.position);
+                    }
                 }
             }
         }

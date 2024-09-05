@@ -283,7 +283,7 @@ MonoBehaviour:
   eyePosition: {fileID: 937609404599132363}
   viewRange: 10
   viewAngle: 90
-  angleChangeVal: 60
+  angleChangeVal: 100
 --- !u!1 &5594344343600486333
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 892fbbc349d46e647b29b199d0dca0bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tf: {fileID: 4262338596958054476}
+  poolType: 0
   Stats: {fileID: 11400000, guid: 6390f171d5bd52b4e95d54d950870f22, type: 2}
   WorldInterfaceModule: {fileID: 1312837258653555374}
   NavigationModule: {fileID: 2396371915774369424}
