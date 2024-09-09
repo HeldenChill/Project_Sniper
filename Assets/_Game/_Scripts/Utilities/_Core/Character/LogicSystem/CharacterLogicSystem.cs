@@ -50,6 +50,10 @@ namespace Utilities.Core.Character.LogicSystem
         {
             Parameter.SetStats(stats);
         }
+        public void ReceiveInformation(ICharacter character)
+        {
+            Parameter.Character = character;
+        }
         public void ReceiveInformation(Type type, string name)
         {
             Parameter.OnAnimationTriggerEvent?.Invoke(type, name);

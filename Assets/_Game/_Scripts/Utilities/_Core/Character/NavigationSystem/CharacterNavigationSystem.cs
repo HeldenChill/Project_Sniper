@@ -39,9 +39,14 @@ namespace Utilities.Core.Character.NavigationSystem
             Parameter.WIData = worldInterface;
         }
 
-        internal void ReceiveInformation<T>(T stats) where T : CharacterStats
+        public void ReceiveInformation<T>(T stats) where T : CharacterStats
         {
             Parameter.SetStats(stats);
+        }
+
+        public void ReceiveInformation(ICharacter character)
+        {
+            Parameter.Character = character;
         }
         #endregion
     }

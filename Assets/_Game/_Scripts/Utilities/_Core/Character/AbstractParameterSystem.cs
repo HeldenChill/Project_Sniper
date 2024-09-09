@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting.Antlr3.Runtime.Misc;
-using UnityEngine;
 using Utilities.Core.Data;
 
 namespace Utilities.Core.Character
@@ -9,6 +5,7 @@ namespace Utilities.Core.Character
     public class AbstractParameterSystem
     {
         protected CharacterStats stats;
+        public ICharacter Character;
 
         public void SetStats<T>(T value) where T : CharacterStats
         {

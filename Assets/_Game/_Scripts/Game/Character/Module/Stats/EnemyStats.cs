@@ -13,18 +13,21 @@ namespace _Game.Character
         public class HiddenStats
         {
             [SerializeField]
-            float maxTimePatrol;
+            float maxPatrolTime;
             [SerializeField]
-            float minTimePatrol;
+            float minPatrolTime;
             [SerializeField]
-            float maxTimeIdle;
+            float maxIdleTime;
             [SerializeField]
-            float minTimeIdle;
+            float minIdleTime;
+            [SerializeField]
+            float turnGuardTime;
 
-            public float MaxTimePatrol => maxTimePatrol;
-            public float MinTimePatrol => minTimeIdle;
-            public float MaxTimeIdle => maxTimeIdle;
-            public float MinTimeIdle => minTimeIdle;
+            public float MaxPatrolTime => maxPatrolTime;
+            public float MinPatrolTime => minIdleTime;
+            public float MaxIdleTime => maxIdleTime;
+            public float MinIdleTime => minIdleTime;
+            public float TurnGuardTime => turnGuardTime;
         }
 
         [SerializeField]

@@ -8,21 +8,21 @@ namespace Utilities.Core.Data
     [CreateAssetMenu(fileName = "PlayerStatus", menuName = "Status Data/Character")]
     public class CharacterStats : ScriptableObject
     {
+        public const int WALK_SPEED = 2;
         [SerializeField]
-        Stat speed;
+        protected Stat speed;
         [SerializeField]
-        Stat jumpSpeed;
+        protected Stat jumpSpeed;
         [SerializeField]
-        Stat hp;
-
+        protected Stat hp;        
+        public Stat Speed => speed;
+        public Stat JumpSpeed => jumpSpeed;
+        public Stat Hp => hp;
         private void OnEnable()
         {
             speed.isDirty = true;
             jumpSpeed.isDirty = true;
             hp.isDirty = true;
         }
-        public Stat Speed => speed;
-        public Stat JumpSpeed => jumpSpeed;
-        public Stat Hp => hp;
     }
 }

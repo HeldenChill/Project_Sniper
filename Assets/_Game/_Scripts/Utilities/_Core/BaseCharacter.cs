@@ -59,10 +59,12 @@ namespace Utilities.Core
             #region Update Data Event
             NavigationSystem.ReceiveInformation(WorldInterfaceSystem.Data);
             NavigationSystem.ReceiveInformation(Stats);
+            NavigationSystem.ReceiveInformation(this);
             LogicSystem.ReceiveInformation(WorldInterfaceSystem.Data);
             LogicSystem.ReceiveInformation(NavigationSystem.Data);
             LogicSystem.ReceiveInformation(PhysicSystem.Data);
             LogicSystem.ReceiveInformation(Stats);
+            LogicSystem.ReceiveInformation(this);
             #endregion
 
         }

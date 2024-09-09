@@ -10,19 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49dac0073ca2b5742a8cadad731a467b, type: 3}
-  m_Name: EnemyStatus
+  m_Name: Enemy1Stat
   m_EditorClassIdentifier: 
   speed:
     BaseValue: 5
-    _value: 5
+    isDirty: 1
+    _value: 2.5
   jumpSpeed:
     BaseValue: 16
+    isDirty: 1
     _value: 0
   hp:
     BaseValue: 1
-    _value: 0
+    isDirty: 1
+    _value: 1
   hidden:
-    maxTimePatrol: 6
-    minTimePatrol: 2
-    maxTimeIdle: 3
-    minTimeIdle: 1
+    maxPatrolTime: 10
+    minPatrolTime: 6
+    maxIdleTime: 10
+    minIdleTime: 6
+    turnGuardTime: 2
